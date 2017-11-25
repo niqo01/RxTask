@@ -1,0 +1,42 @@
+buildscript {
+    dependencies {
+        classpath rootProject.ext.androidPlugin
+        classpath rootProject.ext.kotlinPlugin
+    }
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+dependencies {
+    implementation rootProject.ext.kotlinStdlib
+
+    implementation rootProject.ext.rxJava
+    implementation rootProject.ext.playServicesBase
+
+    implementation rootProject.ext.junit
+}
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dexOptions {
+        preDexLibraries = !rootProject.ext.ci
+    }
+
+    lintOptions {
+        textReport true
+        textOutput 'stdout'
+        disable 'InvalidPackage'
+    }
+}

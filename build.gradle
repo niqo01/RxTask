@@ -1,0 +1,19 @@
+subprojects {
+    buildscript {
+        repositories {
+            mavenCentral()
+            jcenter()
+            google()
+        }
+    }
+
+    repositories {
+        mavenCentral()
+        google()
+    }
+
+    group = GROUP
+    version = VERSION_NAME
+}
+
+apply from: rootProject.file('dependencies.gradle')

@@ -1,0 +1,48 @@
+buildscript {
+    dependencies {
+        classpath rootProject.ext.androidPlugin
+        classpath rootProject.ext.kotlinPlugin
+    }
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        applicationId 'com.example.rxplayservices'
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.compileSdkVersion
+        versionCode 1
+        versionName '1.0.0'
+    }
+
+    lintOptions {
+        textReport true
+        textOutput 'stdout'
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled true
+        }
+    }
+}
+
+dependencies {
+    implementation project(':rx-location')
+    implementation rootProject.ext.playServicesLocation
+    implementation rootProject.ext.kotlinStdlib
+    implementation rootProject.ext.rxJava
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.android.support:design:26.1.0'
+}

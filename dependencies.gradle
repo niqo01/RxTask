@@ -1,0 +1,20 @@
+ext {
+    androidPlugin = 'com.android.tools.build:gradle:3.0.1'
+    minSdkVersion = 14
+    compileSdkVersion = 26
+    buildToolsVersion = '26.0.2'
+
+    ci = 'true'.equals(System.getenv('CI'))
+
+    kotlinPlugin = 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.1.61'
+    kotlinStdlib = 'org.jetbrains.kotlin:kotlin-stdlib:1.1.61'
+
+    playServices = '11.6.0'
+    playServicesBase = "com.google.android.gms:play-services-base:$playServices"
+    playServicesFitness = "com.google.android.gms:play-services-fitness:$playServices"
+    playServicesLocation = "com.google.android.gms:play-services-location:$playServices"
+
+    rxJava = 'io.reactivex.rxjava2:rxjava:2.1.6'
+    junit = 'junit:junit:4.12'
+
+}
