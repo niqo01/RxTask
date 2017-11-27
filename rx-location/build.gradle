@@ -15,6 +15,10 @@ dependencies {
     implementation project(':rx-task')
     implementation rootProject.ext.rxJava
     implementation rootProject.ext.playServicesLocation
+
+    testImplementation rootProject.ext.junit
+    testImplementation rootProject.ext.mockito
+    testImplementation project(':testing-utils')
 }
 
 android {

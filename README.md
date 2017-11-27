@@ -1,7 +1,7 @@
 RxPlayServices
 =========
 
-RxJava binding APIs for Android Play Services.
+RxJava binding APIs for Android Play Services.  
 This project uses the new [GoogleApi][googleapi] based API intoduced in 11.6.0
 
 RxTask

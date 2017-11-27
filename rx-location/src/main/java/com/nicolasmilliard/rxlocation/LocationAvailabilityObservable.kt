@@ -15,11 +15,12 @@ class LocationAvailabilityObservable(private val client: FusedLocationProviderCl
 
     @SuppressLint("MissingPermission")
     override fun subscribeActual(observer: Observer<in LocationAvailability>) {
-        val callback = SensorCallback(client, observer)
-        client.requestLocationUpdates(request, callback, null)
+        val callback = ResultCallback(client, observer)
+        observer.onSubscribe(callback)
+        client.requestLocationUpdates(request, callback, null).addOnCompleteListener(callback)
     }
 
-    internal class SensorCallback(private val client: FusedLocationProviderClient, private val observer: Observer<in LocationAvailability>) : LocationCallback(), Disposable, OnCompleteListener<Void> {
+    internal class ResultCallback(private val client: FusedLocationProviderClient, private val observer: Observer<in LocationAvailability>) : LocationCallback(), Disposable, OnCompleteListener<Void> {
         override fun onLocationAvailability(result: LocationAvailability) {
             super.onLocationAvailability(result)
             if (disposed) return

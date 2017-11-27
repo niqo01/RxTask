@@ -16,6 +16,7 @@ import io.reactivex.plugins.RxJavaPlugins
 class SensorObservable(private val client: SensorsClient, private val request: SensorRequest) : Observable<DataPoint>() {
     override fun subscribeActual(observer: Observer<in DataPoint>) {
         val callback = SensorCallback(client, observer)
+        observer.onSubscribe(callback)
         client.add(request, callback).addOnCompleteListener(callback)
     }
 
