@@ -10,13 +10,12 @@ apply plugin: 'kotlin-android'
 
 dependencies {
 
-    implementation rootProject.ext.rxJava
-    implementation rootProject.ext.playServicesBase
-    implementation rootProject.ext.supportAnnotations
+    implementation rootProject.ext.kotlinStdlib
+    implementation project(':rx-fit')
+    implementation project(':rx-task-kotlin')
 
-    testImplementation rootProject.ext.kotlinStdlib
-    testImplementation rootProject.ext.junit
-    testImplementation project(':testing-utils')
+    implementation rootProject.ext.rxJava
+    implementation rootProject.ext.playServicesFitness
 }
 
 android {
@@ -40,6 +39,7 @@ android {
         textReport true
         textOutput 'stdout'
     }
+
 }
 
 apply from: rootProject.file('gradle/gradle-mvn-push.gradle')

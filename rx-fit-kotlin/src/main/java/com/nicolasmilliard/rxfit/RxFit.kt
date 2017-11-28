@@ -25,7 +25,7 @@ fun HistoryClient.unregisterDataUpdateListenerObs(request: PendingIntent): Compl
 
 fun HistoryClient.insertDataObs(dataSet: DataSet): Completable = this.insertData(dataSet).toCompletable()
 fun HistoryClient.updateDataObs(request: DataUpdateRequest): Completable = this.updateData(request).toCompletable()
-fun HistoryClient.insertDataObs(request: DataDeleteRequest): Completable = this.deleteData(request).toCompletable()
+fun HistoryClient.deleteDataObs(request: DataDeleteRequest): Completable = this.deleteData(request).toCompletable()
 
 fun BleClient.claimBleDeviceObs(deviceAddress: String): Completable = this.claimBleDevice(deviceAddress).toCompletable()
 fun BleClient.claimBleDeviceObs(bleDevice: BleDevice): Completable = this.claimBleDevice(bleDevice).toCompletable()

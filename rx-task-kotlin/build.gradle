@@ -10,13 +10,11 @@ apply plugin: 'kotlin-android'
 
 dependencies {
 
+    implementation rootProject.ext.kotlinStdlib
     implementation rootProject.ext.rxJava
     implementation rootProject.ext.playServicesBase
-    implementation rootProject.ext.supportAnnotations
 
-    testImplementation rootProject.ext.kotlinStdlib
-    testImplementation rootProject.ext.junit
-    testImplementation project(':testing-utils')
+    implementation project(':rx-task')
 }
 
 android {

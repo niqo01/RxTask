@@ -6,8 +6,11 @@ ext {
 
     ci = 'true'.equals(System.getenv('CI'))
 
-    kotlinPlugin = 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.1.61'
-    kotlinStdlib = 'org.jetbrains.kotlin:kotlin-stdlib:1.1.61'
+    kotlinPlugin = 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.0'
+    kotlinStdlib = 'org.jetbrains.kotlin:kotlin-stdlib:1.2.0'
+
+    supportVersion = '27.0.2'
+    supportAnnotations = "com.android.support:support-annotations:$supportVersion"
 
     playServices = '11.6.0'
     playServicesBase = "com.google.android.gms:play-services-base:$playServices"
