@@ -7,7 +7,7 @@ This project uses the new [GoogleApi][googleapi] based API intoduced in 11.6.0
 RxTask
 --------
 
-[Task][task] to Observable. See [RxTask][rxtask].
+[Task][task] to Observable. See [RxTask][rxtask].  
 TBD
 
 
@@ -15,6 +15,12 @@ RxLocation
 --------
 
 TBD
+
+RxPlaces
+--------
+
+TBD
+
 
 RxFit
 --------
