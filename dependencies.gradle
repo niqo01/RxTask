@@ -13,6 +13,7 @@ ext {
     playServicesBase = "com.google.android.gms:play-services-base:$playServices"
     playServicesFitness = "com.google.android.gms:play-services-fitness:$playServices"
     playServicesLocation = "com.google.android.gms:play-services-location:$playServices"
+    playServicesPlaces = "com.google.android.gms:play-services-places:$playServices"
 
     rxJava = 'io.reactivex.rxjava2:rxjava:2.1.6'
     junit = 'junit:junit:4.12'
