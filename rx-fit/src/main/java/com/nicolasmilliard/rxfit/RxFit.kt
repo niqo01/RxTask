@@ -1,12 +1,9 @@
 package com.nicolasmilliard.rxfit
 
 import android.app.PendingIntent
-import com.google.android.gms.fitness.HistoryClient
-import com.google.android.gms.fitness.SensorsClient
-import com.google.android.gms.fitness.data.DataPoint
-import com.google.android.gms.fitness.data.DataSet
-import com.google.android.gms.fitness.data.DataSource
-import com.google.android.gms.fitness.data.DataType
+import android.support.annotation.RequiresPermission
+import com.google.android.gms.fitness.*
+import com.google.android.gms.fitness.data.*
 import com.google.android.gms.fitness.request.*
 import com.google.android.gms.fitness.result.DataReadResponse
 import com.nicolasmilliard.rxtask.toCompletable
@@ -30,4 +27,17 @@ fun HistoryClient.insertDataObs(dataSet: DataSet): Completable = this.insertData
 fun HistoryClient.updateDataObs(request: DataUpdateRequest): Completable = this.updateData(request).toCompletable()
 fun HistoryClient.insertDataObs(request: DataDeleteRequest): Completable = this.deleteData(request).toCompletable()
 
+fun BleClient.claimBleDeviceObs(deviceAddress: String): Completable = this.claimBleDevice(deviceAddress).toCompletable()
+fun BleClient.claimBleDeviceObs(bleDevice: BleDevice): Completable = this.claimBleDevice(bleDevice).toCompletable()
+fun BleClient.listClaimedBleDevicesObs(): Single<List<BleDevice>> = this.listClaimedBleDevices().toSingle()
+@RequiresPermission("android.permission.BLUETOOTH_ADMIN")
+fun BleClient.startBleScanObs(dataTypes: List<DataType> , timeoutSecs: Int , callback: BleScanCallback): Completable = this.startBleScan(dataTypes, timeoutSecs, callback).toCompletable()
+fun BleClient.stopBleScanObs(callback: BleScanCallback): Single<Boolean> = this.stopBleScan(callback).toSingle()
+fun BleClient.unclaimBleDeviceObs(deviceAddress: String): Completable = this.unclaimBleDevice(deviceAddress).toCompletable()
+fun BleClient.unclaimBleDeviceObs(bleDevice: BleDevice): Completable = this.unclaimBleDevice(bleDevice).toCompletable()
 
+fun ConfigClient.createCustomDataTypeObs(request: DataTypeCreateRequest): Single<DataType> = this.createCustomDataType(request).toSingle()
+fun ConfigClient.disableFitObs(): Completable = this.disableFit().toCompletable()
+fun ConfigClient.readDataTypeObs(dataTypeName: String): Single<DataType> = this.readDataType(dataTypeName).toSingle()
+
+fun GoalsClient.readCurrentGoalsObs(request: GoalsReadRequest): Single<List<Goal>> = this.readCurrentGoals(request).toSingle()
