@@ -39,14 +39,14 @@ fun FusedLocationProviderClient.requestLocationUpdatesObs(callbackIntent: Pendin
 fun SettingsClient.checkLocationSettingsObs(request: LocationSettingsRequest): Single<LocationSettingsResponse> = this.checkLocationSettings(request).toSingle()
 
 @RequiresPermission("android.permission.ACCESS_FINE_LOCATION")
-fun GeofencingClient.addGeofencesObs(request: GeofencingRequest, intent: PendingIntent):Completable = this.addGeofences(request, intent).toCompletable()
+fun GeofencingClient.addGeofencesObs(request: GeofencingRequest, intent: PendingIntent): Completable = this.addGeofences(request, intent).toCompletable()
 
-fun GeofencingClient.removeGeofencesObs(geofenceRequestIds: List<String>):Completable = this.removeGeofences(geofenceRequestIds).toCompletable()
+fun GeofencingClient.removeGeofencesObs(geofenceRequestIds: List<String>): Completable = this.removeGeofences(geofenceRequestIds).toCompletable()
 
-fun GeofencingClient.removeGeofencesObs(pendingIntent: PendingIntent):Completable = this.removeGeofences(pendingIntent).toCompletable()
-
-@RequiresPermission("com.google.android.gms.permission.ACTIVITY_RECOGNITION")
-fun ActivityRecognitionClient.requestActivityUpdatesObs(detectionIntervalMillis: Long, callbackIntent: PendingIntent):Completable = this.requestActivityUpdates(detectionIntervalMillis, callbackIntent).toCompletable()
+fun GeofencingClient.removeGeofencesObs(pendingIntent: PendingIntent): Completable = this.removeGeofences(pendingIntent).toCompletable()
 
 @RequiresPermission("com.google.android.gms.permission.ACTIVITY_RECOGNITION")
-fun ActivityRecognitionClient.requestActivityUpdatesObs(callbackIntent: PendingIntent):Completable = this.removeActivityUpdates(callbackIntent).toCompletable()
+fun ActivityRecognitionClient.requestActivityUpdatesObs(detectionIntervalMillis: Long, callbackIntent: PendingIntent): Completable = this.requestActivityUpdates(detectionIntervalMillis, callbackIntent).toCompletable()
+
+@RequiresPermission("com.google.android.gms.permission.ACTIVITY_RECOGNITION")
+fun ActivityRecognitionClient.requestActivityUpdatesObs(callbackIntent: PendingIntent): Completable = this.removeActivityUpdates(callbackIntent).toCompletable()

@@ -1,7 +1,10 @@
 package com.nicolasmilliard.rxlocation
 
 import android.annotation.SuppressLint
-import com.google.android.gms.location.*
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationAvailability
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import io.reactivex.Observable

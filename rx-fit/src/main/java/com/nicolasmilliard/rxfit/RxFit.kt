@@ -31,7 +31,8 @@ fun BleClient.claimBleDeviceObs(deviceAddress: String): Completable = this.claim
 fun BleClient.claimBleDeviceObs(bleDevice: BleDevice): Completable = this.claimBleDevice(bleDevice).toCompletable()
 fun BleClient.listClaimedBleDevicesObs(): Single<List<BleDevice>> = this.listClaimedBleDevices().toSingle()
 @RequiresPermission("android.permission.BLUETOOTH_ADMIN")
-fun BleClient.startBleScanObs(dataTypes: List<DataType> , timeoutSecs: Int , callback: BleScanCallback): Completable = this.startBleScan(dataTypes, timeoutSecs, callback).toCompletable()
+fun BleClient.startBleScanObs(dataTypes: List<DataType>, timeoutSecs: Int, callback: BleScanCallback): Completable = this.startBleScan(dataTypes, timeoutSecs, callback).toCompletable()
+
 fun BleClient.stopBleScanObs(callback: BleScanCallback): Single<Boolean> = this.stopBleScan(callback).toSingle()
 fun BleClient.unclaimBleDeviceObs(deviceAddress: String): Completable = this.unclaimBleDevice(deviceAddress).toCompletable()
 fun BleClient.unclaimBleDeviceObs(bleDevice: BleDevice): Completable = this.unclaimBleDevice(bleDevice).toCompletable()
