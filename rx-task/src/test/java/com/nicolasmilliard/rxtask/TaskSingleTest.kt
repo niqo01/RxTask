@@ -9,7 +9,7 @@ class TaskSingleTest {
     fun testSingleSuccess() {
         val value = ""
         var taskStub = SuccessTaskStub<Any>(value)
-        val taskSingle = TaskSingle(taskStub)
+        val taskSingle = RxTask.toSingle(taskStub)
 
         val testObserver = taskSingle.test()
 
@@ -23,7 +23,7 @@ class TaskSingleTest {
     @Test
     fun testSingleFailure() {
         var taskStub = FailureTaskStub<Any>(Exception("Test"))
-        val taskSingle = TaskSingle(taskStub)
+        val taskSingle = RxTask.toSingle(taskStub)
 
         val testObserver = taskSingle.test()
 
@@ -38,7 +38,7 @@ class TaskSingleTest {
     fun testSingleDispose() {
         var taskStub = SuccessTaskStub<Any>("")
 
-        val taskSingle = TaskSingle(taskStub)
+        val taskSingle = RxTask.toSingle(taskStub)
 
         val testObserver = taskSingle.test()
 

@@ -9,7 +9,7 @@ class TaskMaybeTest {
     fun testMaybeSuccess() {
         val value = ""
         var taskStub = SuccessTaskStub<Any>(value)
-        val taskMaybe = TaskMaybe(taskStub)
+        val taskMaybe = RxTask.toMaybe(taskStub)
 
         val testObserver = taskMaybe.test()
 
@@ -24,7 +24,7 @@ class TaskMaybeTest {
     fun testMaybeComplete() {
         val value: Any? = null
         var taskStub = SuccessTaskStub(value)
-        val taskMaybe = TaskMaybe(taskStub)
+        val taskMaybe = RxTask.toMaybe(taskStub)
 
         val testObserver = taskMaybe.test()
 
@@ -54,7 +54,7 @@ class TaskMaybeTest {
     fun testMaybeDispose() {
         var taskStub = SuccessTaskStub<Any>("")
 
-        val taskMaybe = TaskMaybe(taskStub)
+        val taskMaybe = RxTask.toMaybe(taskStub)
 
         val testObserver = taskMaybe.test()
 

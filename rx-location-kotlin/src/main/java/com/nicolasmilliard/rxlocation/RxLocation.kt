@@ -34,7 +34,7 @@ fun FusedLocationProviderClient.requestLocationAvailabilityUpdatesObs(request: L
 @RequiresPermission(anyOf = arrayOf("android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"))
 fun FusedLocationProviderClient.requestLocationUpdatesObs(request: LocationRequest, callbackIntent: PendingIntent): Completable = this.requestLocationUpdates(request, callbackIntent).toCompletable()
 
-fun FusedLocationProviderClient.requestLocationUpdatesObs(callbackIntent: PendingIntent): Completable = this.removeLocationUpdates(callbackIntent).toCompletable()
+fun FusedLocationProviderClient.removeLocationUpdatesObs(callbackIntent: PendingIntent): Completable = this.removeLocationUpdates(callbackIntent).toCompletable()
 
 fun SettingsClient.checkLocationSettingsObs(request: LocationSettingsRequest): Single<LocationSettingsResponse> = this.checkLocationSettings(request).toSingle()
 
