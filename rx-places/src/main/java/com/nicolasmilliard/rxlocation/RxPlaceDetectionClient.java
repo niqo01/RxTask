@@ -1,6 +1,7 @@
 package com.nicolasmilliard.rxlocation;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
 
 import com.google.android.gms.location.places.PlaceDetectionClient;
@@ -24,7 +25,7 @@ public class RxPlaceDetectionClient {
 
     @NonNull
     @RequiresPermission("android.permission.ACCESS_FINE_LOCATION")
-    public Single<PlaceLikelihoodBufferResponse> getCurrentPlace(PlaceFilter filter) {
+    public Single<PlaceLikelihoodBufferResponse> getCurrentPlace(@Nullable PlaceFilter filter) {
         return toSingle(client.getCurrentPlace(filter));
     }
 
