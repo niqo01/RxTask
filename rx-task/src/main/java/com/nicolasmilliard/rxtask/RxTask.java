@@ -25,7 +25,7 @@ public final class RxTask {
      * Create an Single which emits on {@code task} events.
      */
     @NonNull
-    public static <T> Single<T> toSingle(@NonNull Task<T> task) {
+    public static <T> Single<T> single(@NonNull Task<T> task) {
         checkNotNull(task, "task == null");
         return new TaskSingle<T>(task);
     }
@@ -34,7 +34,7 @@ public final class RxTask {
      * Create an Single which emits on {@code task} events.
      */
     @NonNull
-    public static <T> Maybe<T> toMaybe(@NonNull Task<T> task) {
+    public static <T> Maybe<T> maybe(@NonNull Task<T> task) {
         checkNotNull(task, "task == null");
         return new TaskMaybe<T>(task);
     }
@@ -43,7 +43,7 @@ public final class RxTask {
      * Create an Completable which complete on {@code task} complete event.
      */
     @NonNull
-    public static <T> Completable toCompletable(@NonNull Task<T> task) {
+    public static <T> Completable completable(@NonNull Task<T> task) {
         checkNotNull(task, "task == null");
         return new TaskCompletable(task);
     }

@@ -2,8 +2,8 @@ rootProject.name = 'rx-play-services-root'
 
 include ':rx-task',
         ':rx-task-kotlin',
-        ':rx-fit',
-        ':rx-fit-kotlin',
+        ':rx-fitness',
+        ':rx-fitness-kotlin',
         ':rx-location',
         ':rx-location-kotlin',
         ':rx-places',

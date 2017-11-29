@@ -13,8 +13,8 @@ import java.util.List;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 
-import static com.nicolasmilliard.rxtask.RxTask.toCompletable;
-import static com.nicolasmilliard.rxtask.RxTask.toSingle;
+import static com.nicolasmilliard.rxtask.RxTask.completable;
+import static com.nicolasmilliard.rxtask.RxTask.single;
 
 public class RxBleClient {
 
@@ -26,37 +26,37 @@ public class RxBleClient {
 
     @NonNull
     public Completable claimBleDevice(String deviceAddress) {
-        return toCompletable(client.claimBleDevice(deviceAddress));
+        return completable(client.claimBleDevice(deviceAddress));
     }
 
     @NonNull
     public Completable claimBleDevice(BleDevice bleDevice) {
-        return toCompletable(client.claimBleDevice(bleDevice));
+        return completable(client.claimBleDevice(bleDevice));
     }
 
     @NonNull
     public Single<List<BleDevice>> listClaimedBleDevices() {
-        return toSingle(client.listClaimedBleDevices());
+        return single(client.listClaimedBleDevices());
     }
 
     @NonNull
     @RequiresPermission("android.permission.BLUETOOTH_ADMIN")
     public Completable startBleScan(List<DataType> dataTypes, int timeoutSecs, BleScanCallback callback) {
-        return toCompletable(client.startBleScan(dataTypes, timeoutSecs, callback));
+        return completable(client.startBleScan(dataTypes, timeoutSecs, callback));
     }
 
     @NonNull
     public Single<Boolean> stopBleScan(BleScanCallback callback) {
-        return toSingle(client.stopBleScan(callback));
+        return single(client.stopBleScan(callback));
     }
 
     @NonNull
     public Completable unclaimBleDevice(String deviceAddress) {
-        return toCompletable(client.unclaimBleDevice(deviceAddress));
+        return completable(client.unclaimBleDevice(deviceAddress));
     }
 
     @NonNull
     public Completable unclaimBleDevice(BleDevice bleDevice) {
-        return toCompletable(client.unclaimBleDevice(bleDevice));
+        return completable(client.unclaimBleDevice(bleDevice));
     }
 }

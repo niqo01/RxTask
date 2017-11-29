@@ -15,6 +15,6 @@ fun GeoDataClient.getPlacePhotosObs(placeId: String): Single<PlacePhotoMetadataR
 fun GeoDataClient.getScaledPhotoObs(photoMetadata: PlacePhotoMetadata, width: Int, height: Int): Single<PlacePhotoResponse> = this.getScaledPhoto(photoMetadata, width, height).toSingle()
 
 @RequiresPermission("android.permission.ACCESS_FINE_LOCATION")
-fun PlaceDetectionClient.getCurrentPlaceObs(filter: PlaceFilter): Single<PlaceLikelihoodBufferResponse> = this.getCurrentPlace(filter).toSingle()
+fun PlaceDetectionClient.getCurrentPlaceObs(filter: PlaceFilter?): Single<PlaceLikelihoodBufferResponse> = this.getCurrentPlace(filter).toSingle()
 
 fun PlaceDetectionClient.reportDeviceAtPlaceObs(report: PlaceReport): Completable = this.reportDeviceAtPlace(report).toCompletable()

@@ -10,7 +10,7 @@ import com.google.android.gms.location.SettingsClient;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 
-import static com.nicolasmilliard.rxtask.RxTask.toSingle;
+import static com.nicolasmilliard.rxtask.RxTask.single;
 import static com.nicolasmilliard.rxtask.internal.Preconditions.checkNotNull;
 
 /**
@@ -27,6 +27,6 @@ public class RxSettingsClient {
 
     @NonNull
     public Single<LocationSettingsResponse> checkLocationSettings(LocationSettingsRequest request) {
-        return toSingle(client.checkLocationSettings(request));
+        return single(client.checkLocationSettings(request));
     }
 }

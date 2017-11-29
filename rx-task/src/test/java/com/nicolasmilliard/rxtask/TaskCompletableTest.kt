@@ -8,7 +8,7 @@ class TaskCompletableTest {
     @Test
     fun testCompletableSuccess() {
         var taskStub = SuccessTaskStub<Void>(null)
-        val taskCompletable = RxTask.toCompletable(taskStub)
+        val taskCompletable = RxTask.completable(taskStub)
 
         val testObserver = taskCompletable.test()
 
@@ -24,7 +24,7 @@ class TaskCompletableTest {
     @Test
     fun testCompletableFailure() {
         var taskStub = FailureTaskStub<Void>(Exception("Test"))
-        val taskCompletable = RxTask.toCompletable(taskStub)
+        val taskCompletable = RxTask.completable(taskStub)
 
         val testObserver = taskCompletable.test()
 
@@ -39,7 +39,7 @@ class TaskCompletableTest {
     fun testCompletableDispose() {
         var taskStub = SuccessTaskStub<Void>(null)
 
-        val taskCompletable = RxTask.toCompletable(taskStub)
+        val taskCompletable = RxTask.completable(taskStub)
 
         val testObserver = taskCompletable.test()
 
