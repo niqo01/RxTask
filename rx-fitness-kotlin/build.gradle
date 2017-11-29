@@ -11,7 +11,7 @@ apply plugin: 'kotlin-android'
 dependencies {
 
     implementation rootProject.ext.kotlinStdlib
-    implementation project(':rx-fit')
+    implementation project(':rx-fitness')
     implementation project(':rx-task-kotlin')
 
     implementation rootProject.ext.rxJava
