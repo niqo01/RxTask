@@ -10,7 +10,7 @@ import java.util.List;
 
 import io.reactivex.Single;
 
-import static com.nicolasmilliard.rxtask.RxTask.toSingle;
+import static com.nicolasmilliard.rxtask.RxTask.single;
 
 public class RxGoalsClient {
 
@@ -22,6 +22,6 @@ public class RxGoalsClient {
 
     @NonNull
     public Single<List<Goal>> readCurrentGoals(GoalsReadRequest request) {
-        return toSingle(client.readCurrentGoals(request));
+        return single(client.readCurrentGoals(request));
     }
 }

@@ -12,8 +12,8 @@ import com.google.android.gms.location.places.PlaceReport;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 
-import static com.nicolasmilliard.rxtask.RxTask.toCompletable;
-import static com.nicolasmilliard.rxtask.RxTask.toSingle;
+import static com.nicolasmilliard.rxtask.RxTask.completable;
+import static com.nicolasmilliard.rxtask.RxTask.single;
 
 public class RxPlaceDetectionClient {
 
@@ -26,11 +26,11 @@ public class RxPlaceDetectionClient {
     @NonNull
     @RequiresPermission("android.permission.ACCESS_FINE_LOCATION")
     public Single<PlaceLikelihoodBufferResponse> getCurrentPlace(@Nullable PlaceFilter filter) {
-        return toSingle(client.getCurrentPlace(filter));
+        return single(client.getCurrentPlace(filter));
     }
 
     @NonNull
     public Completable reportDeviceAtPlace(PlaceReport report) {
-        return toCompletable(client.reportDeviceAtPlace(report));
+        return completable(client.reportDeviceAtPlace(report));
     }
 }

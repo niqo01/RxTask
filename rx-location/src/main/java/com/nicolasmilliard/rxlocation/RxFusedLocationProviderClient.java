@@ -15,8 +15,8 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
 
-import static com.nicolasmilliard.rxtask.RxTask.toCompletable;
-import static com.nicolasmilliard.rxtask.RxTask.toMaybe;
+import static com.nicolasmilliard.rxtask.RxTask.completable;
+import static com.nicolasmilliard.rxtask.RxTask.maybe;
 import static com.nicolasmilliard.rxtask.internal.Preconditions.checkNotNull;
 
 /**
@@ -36,12 +36,12 @@ public class RxFusedLocationProviderClient {
             anyOf = {"android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"}
     )
     public Maybe<Location> getLastLocation() {
-        return toMaybe(client.getLastLocation());
+        return maybe(client.getLastLocation());
     }
 
     @NonNull
     public Completable flushLocations() {
-        return toCompletable(client.flushLocations());
+        return completable(client.flushLocations());
     }
 
     @NonNull
@@ -49,7 +49,7 @@ public class RxFusedLocationProviderClient {
             anyOf = {"android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"}
     )
     public Maybe<LocationAvailability> getLocationAvailability() {
-        return toMaybe(client.getLocationAvailability());
+        return maybe(client.getLocationAvailability());
     }
 
     @NonNull
@@ -57,7 +57,7 @@ public class RxFusedLocationProviderClient {
             anyOf = {"android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"}
     )
     public Completable setMockLocation(Location location) {
-        return toCompletable(client.setMockLocation(location));
+        return completable(client.setMockLocation(location));
     }
 
     @NonNull
@@ -65,7 +65,7 @@ public class RxFusedLocationProviderClient {
             anyOf = {"android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"}
     )
     public Completable setMockMode(boolean isMockMode) {
-        return toCompletable(client.setMockMode(isMockMode));
+        return completable(client.setMockMode(isMockMode));
     }
 
     @NonNull
@@ -88,13 +88,13 @@ public class RxFusedLocationProviderClient {
             anyOf = {"android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"}
     )
     public Completable requestLocationUpdates(LocationRequest request, PendingIntent callbackIntent) {
-        return toCompletable(client.requestLocationUpdates(request, callbackIntent));
+        return completable(client.requestLocationUpdates(request, callbackIntent));
     }
 
     @RequiresPermission(
             anyOf = {"android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"}
     )
     public Completable removeLocationUpdates(PendingIntent callbackIntent) {
-        return toCompletable(client.removeLocationUpdates(callbackIntent));
+        return completable(client.removeLocationUpdates(callbackIntent));
     }
 }

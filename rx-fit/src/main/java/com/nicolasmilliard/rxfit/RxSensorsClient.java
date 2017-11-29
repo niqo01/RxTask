@@ -13,7 +13,7 @@ import java.util.List;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 
-import static com.nicolasmilliard.rxtask.RxTask.toSingle;
+import static com.nicolasmilliard.rxtask.RxTask.single;
 
 public class RxSensorsClient {
 
@@ -30,6 +30,6 @@ public class RxSensorsClient {
 
     @NonNull
     public Single<List<DataSource>> findDataSources(DataSourcesRequest request) {
-        return toSingle(client.findDataSources(request));
+        return single(client.findDataSources(request));
     }
 }

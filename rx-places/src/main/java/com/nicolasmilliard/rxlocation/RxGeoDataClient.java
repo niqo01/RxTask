@@ -13,7 +13,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 
 import io.reactivex.Single;
 
-import static com.nicolasmilliard.rxtask.RxTask.toSingle;
+import static com.nicolasmilliard.rxtask.RxTask.single;
 
 public class RxGeoDataClient {
 
@@ -25,27 +25,27 @@ public class RxGeoDataClient {
 
     @NonNull
     public Single<AutocompletePredictionBufferResponse> getAutocompletePredictions(String query, LatLngBounds bounds, AutocompleteFilter filter) {
-        return toSingle(client.getAutocompletePredictions(query, bounds, filter));
+        return single(client.getAutocompletePredictions(query, bounds, filter));
     }
 
     @NonNull
     public Single<PlacePhotoResponse> getPhoto(PlacePhotoMetadata photoMetadata) {
-        return toSingle(client.getPhoto(photoMetadata));
+        return single(client.getPhoto(photoMetadata));
     }
 
     @NonNull
     public Single<PlaceBufferResponse> getPlaceById(String... placeIds) {
-        return toSingle(client.getPlaceById(placeIds));
+        return single(client.getPlaceById(placeIds));
     }
 
     @NonNull
     public Single<PlacePhotoMetadataResponse> getPlacePhotos(String placeId) {
-        return toSingle(client.getPlacePhotos(placeId));
+        return single(client.getPlacePhotos(placeId));
     }
 
     @NonNull
     public Single<PlacePhotoResponse> getScaledPhoto(PlacePhotoMetadata photoMetadata, int width, int height) {
-        return toSingle(client.getScaledPhoto(photoMetadata, width, height));
+        return single(client.getScaledPhoto(photoMetadata, width, height));
     }
 
 }

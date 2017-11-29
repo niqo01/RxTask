@@ -13,7 +13,7 @@ import java.util.List;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 
-import static com.nicolasmilliard.rxtask.RxTask.toCompletable;
+import static com.nicolasmilliard.rxtask.RxTask.completable;
 import static com.nicolasmilliard.rxtask.internal.Preconditions.checkNotNull;
 
 /**
@@ -31,16 +31,16 @@ public class RxGeofencingClient {
     @NonNull
     @RequiresPermission("android.permission.ACCESS_FINE_LOCATION")
     public Completable addGeofences(GeofencingRequest request, PendingIntent intent) {
-        return toCompletable(client.addGeofences(request, intent));
+        return completable(client.addGeofences(request, intent));
     }
 
     @NonNull
     public Completable removeGeofences(List<String> geofenceRequestIds) {
-        return toCompletable(client.removeGeofences(geofenceRequestIds));
+        return completable(client.removeGeofences(geofenceRequestIds));
     }
 
     @NonNull
     public Completable removeGeofences(PendingIntent pendingIntent) {
-        return toCompletable(client.removeGeofences(pendingIntent));
+        return completable(client.removeGeofences(pendingIntent));
     }
 }
