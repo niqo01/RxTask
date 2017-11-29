@@ -1,7 +1,7 @@
 RxPlayServices
 =========
 
-RxJava wrappers for Android Play Services and corresponding Kotlin extensions.
+RxJava wrappers for Google Play Services and corresponding Kotlin extensions.
 This project uses the new [GoogleApi][googleapi] based API introduced in version 11.6.0.
 
 RxTask
@@ -9,12 +9,13 @@ RxTask
 
 Lightweight wrapper for the Google play services [Tasks][task] API.
 
-
+Java sample
 ```java
     PlaceDetectionClient client = Places.getPlaceDetectionClient(context, null);
     Single<PlaceLikelihoodBufferResponse> single = RxTask.single(client.getCurrentPlace(null));
 ```
 
+Kotlin sample
 ```kotlin
     val client = Places.getPlaceDetectionClient(context, null)
     val single = client.getCurrentPlace(null).toSingle();
