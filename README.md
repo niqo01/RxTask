@@ -1,21 +1,51 @@
 RxPlayServices
 =========
 
-RxJava wrappers for Google Play Services and corresponding Kotlin extensions.
-This project uses the new [GoogleApi][googleapi] based API introduced in version 11.6.0.
+RxJava binding API for Google Play Services and corresponding Kotlin extensions.  
+This project uses the new [GoogleApi][googleapi]introduced in version 11.6.0.
+
+Download
+--------
+
+[Task][task] library bindings:
+```groovy
+implementation 'com.github.niqo01.rxplayservices:rx-play-services-task:0.1.0'
+```
+
+'play-services-location' library bindings:
+```groovy
+implementation 'com.github.niqo01.rxplayservices:rx-play-services-location:0.1.0'
+```
+
+'play-services-places' library bindings:
+```groovy
+implementation 'com.github.niqo01.rxplayservices:rx-play-services-places:0.1.0'
+```
+
+'rx-play-services-fitness' library bindings:
+```groovy
+implementation 'com.github.niqo01.rxplayservices:rx-play-services-fitness:0.1.0'
+```
+
+Kotlin extension methods for all of the above libraries are available by appending `-kotlin` to the
+'artifactId' of the dependency. For example, `rx-play-services-task` becomes
+`rx-play-services-task-kotlin`.
+
+Snapshots of the development version are available in [Sonatype's `snapshots` repository][snap].
+
 
 RxTask
 --------
 
 Lightweight wrapper for the Google play services [Tasks][task] API.
 
-Java sample
+Java sample:
 ```java
     PlaceDetectionClient client = Places.getPlaceDetectionClient(context, null);
     Single<PlaceLikelihoodBufferResponse> single = RxTask.single(client.getCurrentPlace(null));
 ```
 
-Kotlin sample
+Kotlin sample:
 ```kotlin
     val client = Places.getPlaceDetectionClient(context, null)
     val single = client.getCurrentPlace(null).toSingle();
@@ -25,18 +55,65 @@ Kotlin sample
 RxLocation
 --------
 
-TBD
+Java sample:
+```java
+    FusedLocationProviderClient client = LocationServices
+            .getFusedLocationProviderClient(context);
+    RxFusedLocationProviderClient rxClient = new
+            RxFusedLocationProviderClient(client);
+    Observable<LocationResult> result = rxClient
+            .requestLocationRequestUpdates(LocationRequest.create());
+```
+
+Kotlin sample:
+```kotlin
+    val client = LocationServices
+            .getFusedLocationProviderClient(context)
+    val result: Observable<LocationResult> = client
+            .requestLocationRequestUpdatesObs(LocationRequest.create())
+```
 
 RxPlaces
 --------
 
-TBD
+Java sample:
+```java
+    PlaceDetectionClient client = Places.getPlaceDetectionClient(context, null);
+    RxPlaceDetectionClient rxClient = new RxPlaceDetectionClient(client);
+    Single<PlaceLikelihoodBufferResponse> currentPlace = rxClient
+            .getCurrentPlace(null);
+```
 
+Kotlin sample:
+```kotlin
+val client = Places.getPlaceDetectionClient(context, null)
+val currentPlace: Single<PlaceLikelihoodBufferResponse> = client
+            .getCurrentPlaceObs(null)
+```
 
-RxFit
+RxFitness
 --------
 
-TBD
+Java sample:
+```java
+    SensorsClient client = Fitness.getSensorsClient(context, signInAccount);
+    RxSensorsClient rxClient = new RxSensorsClient(client);
+    SensorRequest request = new SensorRequest.Builder()
+            .setDataType(DataType
+            .TYPE_CALORIES_EXPENDED)
+            .build();
+    Observable<DataPoint> dataPointObservable = rxClient.readData(request);
+```
+
+Kotlin sample:
+```kotlin
+    val client = Fitness.getSensorsClient(context, signInAccount)
+    val request = SensorRequest.Builder()
+            .setDataType(DataType
+                    .TYPE_CALORIES_EXPENDED)
+            .build()
+    val dataPointObservable: Observable<DataPoint> = client.readDataObs(request)
+```
 
 License
 -------
@@ -58,3 +135,4 @@ License
  [googleapi]: https://android-developers.googleblog.com/2017/11/moving-past-googleapiclient_21.html
  [task]: https://developers.google.com/android/guides/tasks
  [rxtask]: https://github.com/niqo01/RxPlayServices/blob/master/rx-task/src/main/java/com/nicolasmilliard/rxtask/RxTask.kt
+ [snap]: https://oss.sonatype.org/content/repositories/snapshots/
