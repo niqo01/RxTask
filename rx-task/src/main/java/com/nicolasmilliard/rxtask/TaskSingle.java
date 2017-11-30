@@ -17,7 +17,8 @@ final class TaskSingle<T> extends Single<T> {
         this.task = task;
     }
 
-    protected void subscribeActual(SingleObserver observer) {
+    @Override
+    protected void subscribeActual(SingleObserver<? super T> observer) {
         TaskSingle.TaskCallback callback = new TaskSingle.TaskCallback(observer);
         observer.onSubscribe(callback);
         this.task.addOnCompleteListener(callback);

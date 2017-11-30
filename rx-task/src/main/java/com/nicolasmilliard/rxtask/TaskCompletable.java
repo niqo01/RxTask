@@ -18,6 +18,7 @@ final class TaskCompletable extends Completable {
         this.task = task;
     }
 
+    @Override
     protected void subscribeActual(CompletableObserver observer) {
         TaskCompletable.TaskCallback callback = new TaskCompletable.TaskCallback(observer);
         observer.onSubscribe(callback);

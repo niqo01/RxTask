@@ -17,7 +17,8 @@ final class TaskMaybe<T> extends Maybe<T> {
         this.task = task;
     }
 
-    protected void subscribeActual(MaybeObserver observer) {
+    @Override
+    protected void subscribeActual(MaybeObserver<? super T> observer) {
         TaskMaybe.TaskCallback callback = new TaskMaybe.TaskCallback(observer);
         observer.onSubscribe(callback);
         this.task.addOnCompleteListener(callback);

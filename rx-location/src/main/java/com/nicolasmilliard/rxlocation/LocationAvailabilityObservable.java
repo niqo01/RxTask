@@ -26,19 +26,20 @@ final class LocationAvailabilityObservable extends Observable<LocationAvailabili
     }
 
     @SuppressLint({"MissingPermission"})
-    protected void subscribeActual(Observer observer) {
+    @Override
+    protected void subscribeActual(Observer<? super LocationAvailability> observer) {
         LocationAvailabilityObservable.ResultCallback callback = new LocationAvailabilityObservable.ResultCallback(this.client, observer);
         observer.onSubscribe(callback);
         this.client.requestLocationUpdates(this.request, callback, null)
                 .addOnCompleteListener(callback);
     }
 
-    public static final class ResultCallback extends LocationCallback implements Disposable, OnCompleteListener {
+    public static final class ResultCallback extends LocationCallback implements Disposable, OnCompleteListener<Void> {
         private final FusedLocationProviderClient client;
-        private final Observer<LocationAvailability> observer;
+        private final Observer<? super LocationAvailability> observer;
         private boolean disposed;
 
-        public ResultCallback(FusedLocationProviderClient client, Observer<LocationAvailability> observer) {
+        public ResultCallback(FusedLocationProviderClient client, Observer<? super LocationAvailability> observer) {
             this.client = client;
             this.observer = observer;
         }
@@ -50,7 +51,7 @@ final class LocationAvailabilityObservable extends Observable<LocationAvailabili
             }
         }
 
-        public void onComplete(Task task) {
+        public void onComplete(Task<Void> task) {
             if (this.disposed) return;
             if (!task.isSuccessful()) {
                 try {
