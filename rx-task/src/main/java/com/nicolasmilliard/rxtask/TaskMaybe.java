@@ -35,10 +35,11 @@ final class TaskMaybe<T> extends Maybe<T> {
             if (this.disposed) return;
 
             if (task.isSuccessful()) {
-                if (task.getResult() == null) {
+                T result = task.getResult();
+                if (result == null) {
                     this.observer.onComplete();
                 } else {
-                    this.observer.onSuccess(task.getResult());
+                    this.observer.onSuccess(result);
                 }
             } else {
                 try {

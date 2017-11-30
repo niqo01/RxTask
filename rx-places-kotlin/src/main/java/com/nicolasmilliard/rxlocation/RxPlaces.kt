@@ -8,7 +8,7 @@ import com.nicolasmilliard.rxtask.toSingle
 import io.reactivex.Completable
 import io.reactivex.Single
 
-fun GeoDataClient.getAutocompletePredictionsObs(query: String, bounds: LatLngBounds, filter: AutocompleteFilter): Single<AutocompletePredictionBufferResponse> = this.getAutocompletePredictions(query, bounds, filter).toSingle()
+fun GeoDataClient.getAutocompletePredictionsObs(query: String?, bounds: LatLngBounds?, filter: AutocompleteFilter?): Single<AutocompletePredictionBufferResponse> = this.getAutocompletePredictions(query, bounds, filter).toSingle()
 fun GeoDataClient.getPhotoObs(photoMetadata: PlacePhotoMetadata): Single<PlacePhotoResponse> = this.getPhoto(photoMetadata).toSingle()
 fun GeoDataClient.getPlaceByIdObs(placeIds: Array<String>): Single<PlaceBufferResponse> = this.getPlaceById(*placeIds).toSingle()
 fun GeoDataClient.getPlacePhotosObs(placeId: String): Single<PlacePhotoMetadataResponse> = this.getPlacePhotos(placeId).toSingle()
