@@ -27,7 +27,7 @@ public final class RxTask {
     @NonNull
     public static <T> Single<T> single(@NonNull Task<T> task) {
         checkNotNull(task, "task == null");
-        return new TaskSingle<T>(task);
+        return new TaskSingle<>(task);
     }
 
     /**
@@ -36,14 +36,14 @@ public final class RxTask {
     @NonNull
     public static <T> Maybe<T> maybe(@NonNull Task<T> task) {
         checkNotNull(task, "task == null");
-        return new TaskMaybe<T>(task);
+        return new TaskMaybe<>(task);
     }
 
     /**
      * Create an Completable which complete on {@code task} complete event.
      */
     @NonNull
-    public static <T> Completable completable(@NonNull Task<T> task) {
+    public static Completable completable(@NonNull Task<Void> task) {
         checkNotNull(task, "task == null");
         return new TaskCompletable(task);
     }

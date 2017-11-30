@@ -12,9 +12,9 @@ import io.reactivex.plugins.RxJavaPlugins;
 
 final class TaskCompletable extends Completable {
 
-    private final Task task;
+    private final Task<Void> task;
 
-    public TaskCompletable(Task task) {
+    public TaskCompletable(Task<Void> task) {
         this.task = task;
     }
 
@@ -25,7 +25,7 @@ final class TaskCompletable extends Completable {
         this.task.addOnCompleteListener(callback);
     }
 
-    private static final class TaskCallback implements Disposable, OnCompleteListener {
+    private static final class TaskCallback implements Disposable, OnCompleteListener<Void> {
         private final CompletableObserver observer;
         private boolean disposed;
 
@@ -33,7 +33,7 @@ final class TaskCompletable extends Completable {
             this.observer = observer;
         }
 
-        public void onComplete(Task task) {
+        public void onComplete(Task<Void> task) {
             if (this.disposed) return;
 
             if (task.isSuccessful()) {

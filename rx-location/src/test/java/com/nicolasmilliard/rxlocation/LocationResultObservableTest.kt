@@ -40,17 +40,19 @@ class LocationResultObservableTest {
 
         testObserver.assertSubscribed()
 
-        callback!!.onLocationResult(LocationResult.create(ArrayList()))
+        val value1 = LocationResult.create(ArrayList())
+        callback!!.onLocationResult(value1)
 
         testObserver.assertSubscribed()
-                .assertValue({ res -> res is LocationResult })
+                .assertValue(value1)
                 .assertNoErrors()
 
-        callback!!.onLocationResult(LocationResult.create(ArrayList()))
+        val value2 = LocationResult.create(ArrayList())
+        callback!!.onLocationResult(value2)
 
         assertTrue(testObserver.valueCount() == 2)
         testObserver.assertSubscribed()
-                .assertValueAt(1, { res -> res is LocationResult })
+                .assertValues(value1, value2)
                 .assertNoErrors()
 
         testObserver.dispose()

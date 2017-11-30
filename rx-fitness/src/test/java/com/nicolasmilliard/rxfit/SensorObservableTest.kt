@@ -21,7 +21,7 @@ class SensorObservableTest {
 
     @Mock
     var mockClient: SensorsClient? = null
-    val dataPoint = DataPoint.create(DataSource.Builder()
+    val dataPoint: DataPoint = DataPoint.create(DataSource.Builder()
             .setDataType(DataType.AGGREGATE_ACTIVITY_SUMMARY)
             .setType(3)
             .build())
@@ -50,14 +50,14 @@ class SensorObservableTest {
         callback!!.onDataPoint(dataPoint)
 
         testObserver.assertSubscribed()
-                .assertValue({ res -> res is DataPoint })
+                .assertValue(dataPoint)
                 .assertNoErrors()
 
         callback!!.onDataPoint(dataPoint)
 
         assertTrue(testObserver.valueCount() == 2)
         testObserver.assertSubscribed()
-                .assertValueAt(1, { res -> res is DataPoint })
+                .assertValues(dataPoint, dataPoint)
                 .assertNoErrors()
 
         testObserver.dispose()
