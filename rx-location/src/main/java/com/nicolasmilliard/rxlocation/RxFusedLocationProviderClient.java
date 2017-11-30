@@ -16,7 +16,6 @@ import io.reactivex.Maybe;
 import io.reactivex.Observable;
 
 import static com.nicolasmilliard.rxtask.RxTask.completable;
-import static com.nicolasmilliard.rxtask.RxTask.maybe;
 import static com.nicolasmilliard.rxtask.internal.Preconditions.checkNotNull;
 
 /**
@@ -37,12 +36,12 @@ public class RxFusedLocationProviderClient {
                     ".ACCESS_FINE_LOCATION"}
     )
     public Maybe<Location> getLastLocation() {
-        return maybe(client.getLastLocation());
+        return new LastLocationObservable(client);
     }
 
     @NonNull
     public Completable flushLocations() {
-        return completable(client.flushLocations());
+        return new FlushLocationCompletable(client);
     }
 
     @NonNull
@@ -51,7 +50,7 @@ public class RxFusedLocationProviderClient {
                     ".ACCESS_FINE_LOCATION"}
     )
     public Maybe<LocationAvailability> getLocationAvailability() {
-        return maybe(client.getLocationAvailability());
+        return new GetLocationAvailabilityObservable(client);
     }
 
     @NonNull
