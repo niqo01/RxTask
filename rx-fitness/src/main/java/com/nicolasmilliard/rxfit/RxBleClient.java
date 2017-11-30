@@ -41,7 +41,8 @@ public class RxBleClient {
 
     @NonNull
     @RequiresPermission("android.permission.BLUETOOTH_ADMIN")
-    public Completable startBleScan(List<DataType> dataTypes, int timeoutSecs, BleScanCallback callback) {
+    public Completable startBleScan(List<DataType> dataTypes, int timeoutSecs, BleScanCallback
+            callback) {
         return completable(client.startBleScan(dataTypes, timeoutSecs, callback));
     }
 

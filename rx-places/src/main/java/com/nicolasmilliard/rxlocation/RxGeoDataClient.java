@@ -24,7 +24,9 @@ public class RxGeoDataClient {
     }
 
     @NonNull
-    public Single<AutocompletePredictionBufferResponse> getAutocompletePredictions(String query, LatLngBounds bounds, AutocompleteFilter filter) {
+    public Single<AutocompletePredictionBufferResponse> getAutocompletePredictions(String query,
+                                                                                   LatLngBounds
+                                                                                           bounds, AutocompleteFilter filter) {
         return single(client.getAutocompletePredictions(query, bounds, filter));
     }
 
@@ -44,7 +46,8 @@ public class RxGeoDataClient {
     }
 
     @NonNull
-    public Single<PlacePhotoResponse> getScaledPhoto(PlacePhotoMetadata photoMetadata, int width, int height) {
+    public Single<PlacePhotoResponse> getScaledPhoto(PlacePhotoMetadata photoMetadata, int width,
+                                                     int height) {
         return single(client.getScaledPhoto(photoMetadata, width, height));
     }
 

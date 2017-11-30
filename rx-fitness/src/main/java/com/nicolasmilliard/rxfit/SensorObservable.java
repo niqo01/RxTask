@@ -25,12 +25,14 @@ public final class SensorObservable extends Observable<DataPoint> {
 
     @Override
     protected void subscribeActual(Observer<? super DataPoint> observer) {
-        SensorObservable.SensorCallback callback = new SensorObservable.SensorCallback(this.client, observer);
+        SensorObservable.SensorCallback callback = new SensorObservable.SensorCallback(this
+                .client, observer);
         observer.onSubscribe(callback);
         this.client.add(this.request, callback).addOnCompleteListener(callback);
     }
 
-    public static final class SensorCallback implements Disposable, OnCompleteListener<Void>, OnDataPointListener {
+    public static final class SensorCallback implements Disposable, OnCompleteListener<Void>,
+            OnDataPointListener {
         private final SensorsClient client;
         private final Observer<? super DataPoint> observer;
         private boolean disposed;
