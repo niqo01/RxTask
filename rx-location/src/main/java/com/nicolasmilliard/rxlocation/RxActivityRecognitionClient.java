@@ -27,7 +27,8 @@ public class RxActivityRecognitionClient {
 
     @NonNull
     @RequiresPermission("com.google.android.gms.permission.ACTIVITY_RECOGNITION")
-    public Completable requestActivityUpdates(Long detectionIntervalMillis, PendingIntent callbackIntent) {
+    public Completable requestActivityUpdates(Long detectionIntervalMillis, PendingIntent
+            callbackIntent) {
         return completable(client.requestActivityUpdates(detectionIntervalMillis, callbackIntent));
     }
 

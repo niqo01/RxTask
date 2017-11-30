@@ -17,17 +17,18 @@ final class TaskSingle<T> extends Single<T> {
         this.task = task;
     }
 
-    protected void subscribeActual(SingleObserver observer) {
-        TaskSingle.TaskCallback callback = new TaskSingle.TaskCallback(observer);
+    @Override
+    protected void subscribeActual(SingleObserver<? super T> observer) {
+        TaskSingle.TaskCallback<T> callback = new TaskSingle.TaskCallback<T>(observer);
         observer.onSubscribe(callback);
         this.task.addOnCompleteListener(callback);
     }
 
     private static final class TaskCallback<T> implements Disposable, OnCompleteListener<T> {
-        private final SingleObserver<T> observer;
+        private final SingleObserver<? super T> observer;
         private boolean disposed;
 
-        public TaskCallback(SingleObserver<T> observer) {
+        public TaskCallback(SingleObserver<? super T> observer) {
             this.observer = observer;
         }
 

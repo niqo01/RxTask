@@ -17,17 +17,18 @@ final class TaskMaybe<T> extends Maybe<T> {
         this.task = task;
     }
 
-    protected void subscribeActual(MaybeObserver observer) {
-        TaskMaybe.TaskCallback callback = new TaskMaybe.TaskCallback(observer);
+    @Override
+    protected void subscribeActual(MaybeObserver<? super T> observer) {
+        TaskMaybe.TaskCallback<T> callback = new TaskMaybe.TaskCallback<T>(observer);
         observer.onSubscribe(callback);
         this.task.addOnCompleteListener(callback);
     }
 
     private static final class TaskCallback<T> implements Disposable, OnCompleteListener<T> {
-        private final MaybeObserver<T> observer;
+        private final MaybeObserver<? super T> observer;
         private boolean disposed;
 
-        public TaskCallback(MaybeObserver<T> observer) {
+        public TaskCallback(MaybeObserver<? super T> observer) {
             this.observer = observer;
         }
 
@@ -35,10 +36,11 @@ final class TaskMaybe<T> extends Maybe<T> {
             if (this.disposed) return;
 
             if (task.isSuccessful()) {
-                if (task.getResult() == null) {
+                T result = task.getResult();
+                if (result == null) {
                     this.observer.onComplete();
                 } else {
-                    this.observer.onSuccess(task.getResult());
+                    this.observer.onSuccess(result);
                 }
             } else {
                 try {

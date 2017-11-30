@@ -24,7 +24,8 @@ public final class Preconditions {
         if (Looper.myLooper() != Looper.getMainLooper()) {
             observer.onSubscribe(Disposables.empty());
             observer.onError(new IllegalStateException(
-                    "Expected to be called on the main thread but was " + Thread.currentThread().getName()));
+                    "Expected to be called on the main thread but was " + Thread.currentThread()
+                            .getName()));
             return false;
         }
         return true;

@@ -33,7 +33,8 @@ public class RxFusedLocationProviderClient {
 
     @NonNull
     @RequiresPermission(
-            anyOf = {"android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"}
+            anyOf = {"android.permission.ACCESS_COARSE_LOCATION", "android.permission" +
+                    ".ACCESS_FINE_LOCATION"}
     )
     public Maybe<Location> getLastLocation() {
         return maybe(client.getLastLocation());
@@ -46,7 +47,8 @@ public class RxFusedLocationProviderClient {
 
     @NonNull
     @RequiresPermission(
-            anyOf = {"android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"}
+            anyOf = {"android.permission.ACCESS_COARSE_LOCATION", "android.permission" +
+                    ".ACCESS_FINE_LOCATION"}
     )
     public Maybe<LocationAvailability> getLocationAvailability() {
         return maybe(client.getLocationAvailability());
@@ -54,7 +56,8 @@ public class RxFusedLocationProviderClient {
 
     @NonNull
     @RequiresPermission(
-            anyOf = {"android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"}
+            anyOf = {"android.permission.ACCESS_COARSE_LOCATION", "android.permission" +
+                    ".ACCESS_FINE_LOCATION"}
     )
     public Completable setMockLocation(Location location) {
         return completable(client.setMockLocation(location));
@@ -62,7 +65,8 @@ public class RxFusedLocationProviderClient {
 
     @NonNull
     @RequiresPermission(
-            anyOf = {"android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"}
+            anyOf = {"android.permission.ACCESS_COARSE_LOCATION", "android.permission" +
+                    ".ACCESS_FINE_LOCATION"}
     )
     public Completable setMockMode(boolean isMockMode) {
         return completable(client.setMockMode(isMockMode));
@@ -70,7 +74,8 @@ public class RxFusedLocationProviderClient {
 
     @NonNull
     @RequiresPermission(
-            anyOf = {"android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"}
+            anyOf = {"android.permission.ACCESS_COARSE_LOCATION", "android.permission" +
+                    ".ACCESS_FINE_LOCATION"}
     )
     public Observable<LocationResult> requestLocationRequestUpdates(LocationRequest request) {
         return new LocationResultObservable(client, request);
@@ -78,21 +83,26 @@ public class RxFusedLocationProviderClient {
 
     @NonNull
     @RequiresPermission(
-            anyOf = {"android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"}
+            anyOf = {"android.permission.ACCESS_COARSE_LOCATION", "android.permission" +
+                    ".ACCESS_FINE_LOCATION"}
     )
-    public Observable<LocationAvailability> requestLocationAvailabilityUpdates(LocationRequest request) {
+    public Observable<LocationAvailability> requestLocationAvailabilityUpdates(LocationRequest
+                                                                                       request) {
         return new LocationAvailabilityObservable(client, request);
     }
 
     @RequiresPermission(
-            anyOf = {"android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"}
+            anyOf = {"android.permission.ACCESS_COARSE_LOCATION", "android.permission" +
+                    ".ACCESS_FINE_LOCATION"}
     )
-    public Completable requestLocationUpdates(LocationRequest request, PendingIntent callbackIntent) {
+    public Completable requestLocationUpdates(LocationRequest request, PendingIntent
+            callbackIntent) {
         return completable(client.requestLocationUpdates(request, callbackIntent));
     }
 
     @RequiresPermission(
-            anyOf = {"android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"}
+            anyOf = {"android.permission.ACCESS_COARSE_LOCATION", "android.permission" +
+                    ".ACCESS_FINE_LOCATION"}
     )
     public Completable removeLocationUpdates(PendingIntent callbackIntent) {
         return completable(client.removeLocationUpdates(callbackIntent));

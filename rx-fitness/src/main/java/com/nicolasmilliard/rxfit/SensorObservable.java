@@ -23,18 +23,21 @@ public final class SensorObservable extends Observable<DataPoint> {
         this.request = request;
     }
 
-    protected void subscribeActual(Observer observer) {
-        SensorObservable.SensorCallback callback = new SensorObservable.SensorCallback(this.client, observer);
+    @Override
+    protected void subscribeActual(Observer<? super DataPoint> observer) {
+        SensorObservable.SensorCallback callback = new SensorObservable.SensorCallback(this
+                .client, observer);
         observer.onSubscribe(callback);
         this.client.add(this.request, callback).addOnCompleteListener(callback);
     }
 
-    public static final class SensorCallback implements Disposable, OnCompleteListener, OnDataPointListener {
+    public static final class SensorCallback implements Disposable, OnCompleteListener<Void>,
+            OnDataPointListener {
         private final SensorsClient client;
-        private final Observer<DataPoint> observer;
+        private final Observer<? super DataPoint> observer;
         private boolean disposed;
 
-        public SensorCallback(SensorsClient client, Observer<DataPoint> observer) {
+        public SensorCallback(SensorsClient client, Observer<? super DataPoint> observer) {
             this.client = client;
             this.observer = observer;
         }
@@ -45,7 +48,7 @@ public final class SensorObservable extends Observable<DataPoint> {
             }
         }
 
-        public void onComplete(Task task) {
+        public void onComplete(Task<Void> task) {
             if (this.disposed) return;
             if (!task.isSuccessful()) {
                 try {
