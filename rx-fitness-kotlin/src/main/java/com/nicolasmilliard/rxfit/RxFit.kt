@@ -6,39 +6,36 @@ import com.google.android.gms.fitness.*
 import com.google.android.gms.fitness.data.*
 import com.google.android.gms.fitness.request.*
 import com.google.android.gms.fitness.result.DataReadResponse
-import com.nicolasmilliard.rxtask.toCompletable
-import com.nicolasmilliard.rxtask.toSingle
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
 
 
 fun SensorsClient.readDataObs(request: SensorRequest): Observable<DataPoint> = SensorObservable(this, request)
-fun SensorsClient.findDataSourcesObs(request: DataSourcesRequest): Single<List<DataSource>> = this.findDataSources(request).toSingle()
+fun SensorsClient.findDataSourcesObs(request: DataSourcesRequest): Single<List<DataSource>> = FindDataSourcesSingle(this, request)
 
-fun HistoryClient.readDataObs(request: DataReadRequest): Single<DataReadResponse> = this.readData(request).toSingle()
-fun HistoryClient.readDailyTotalObs(request: DataType): Single<DataSet> = this.readDailyTotal(request).toSingle()
-fun HistoryClient.readDailyTotalFromLocalDeviceObs(request: DataType): Single<DataSet> = this.readDailyTotalFromLocalDevice(request).toSingle()
+fun HistoryClient.readDataObs(request: DataReadRequest): Single<DataReadResponse> = ReadDataSingle(this, request)
+fun HistoryClient.readDailyTotalObs(request: DataType): Single<DataSet> = ReadDailyTotalSingle(this, request)
+fun HistoryClient.readDailyTotalFromLocalDeviceObs(request: DataType): Single<DataSet> = ReadDailyTotalFromLocalDeviceSingle(this, request)
 
-fun HistoryClient.registerDataUpdateListenerObs(request: DataUpdateListenerRegistrationRequest): Completable = this.registerDataUpdateListener(request).toCompletable()
-fun HistoryClient.unregisterDataUpdateListenerObs(request: PendingIntent): Completable = this.unregisterDataUpdateListener(request).toCompletable()
+fun HistoryClient.registerDataUpdateListenerObs(request: DataUpdateListenerRegistrationRequest): Completable = RegisterDataUpdateListenerCompletable(this, request)
+fun HistoryClient.unregisterDataUpdateListenerObs(request: PendingIntent): Completable = UnRegisterDataUpdateListenerCompletable(this, request)
 
-fun HistoryClient.insertDataObs(dataSet: DataSet): Completable = this.insertData(dataSet).toCompletable()
-fun HistoryClient.updateDataObs(request: DataUpdateRequest): Completable = this.updateData(request).toCompletable()
-fun HistoryClient.deleteDataObs(request: DataDeleteRequest): Completable = this.deleteData(request).toCompletable()
+fun HistoryClient.insertDataObs(dataSet: DataSet): Completable = InsertDataCompletable(this, dataSet)
+fun HistoryClient.updateDataObs(request: DataUpdateRequest): Completable = UpdateDataCompletable(this, request)
+fun HistoryClient.deleteDataObs(request: DataDeleteRequest): Completable = DeleteDataCompletable(this, request)
 
-fun BleClient.claimBleDeviceObs(deviceAddress: String): Completable = this.claimBleDevice(deviceAddress).toCompletable()
-fun BleClient.claimBleDeviceObs(bleDevice: BleDevice): Completable = this.claimBleDevice(bleDevice).toCompletable()
-fun BleClient.listClaimedBleDevicesObs(): Single<List<BleDevice>> = this.listClaimedBleDevices().toSingle()
+fun BleClient.claimBleDeviceObs(deviceAddress: String): Completable = ClaimBleDeviceByAddressCompletable(this, deviceAddress)
+fun BleClient.claimBleDeviceObs(bleDevice: BleDevice): Completable = ClaimBleDeviceCompletable(this, bleDevice)
+fun BleClient.listClaimedBleDevicesObs(): Single<List<BleDevice>> = ListClaimedBleDeviceSingle(this)
 @RequiresPermission("android.permission.BLUETOOTH_ADMIN")
-fun BleClient.startBleScanObs(dataTypes: List<DataType>, timeoutSecs: Int, callback: BleScanCallback): Completable = this.startBleScan(dataTypes, timeoutSecs, callback).toCompletable()
+fun BleClient.startBleScanObs(dataTypes: List<DataType>, timeoutSecs: Int, callback: BleScanCallback): Observable<BleDevice> = StartBleScanObservable(this, dataTypes, timeoutSecs)
 
-fun BleClient.stopBleScanObs(callback: BleScanCallback): Single<Boolean> = this.stopBleScan(callback).toSingle()
-fun BleClient.unclaimBleDeviceObs(deviceAddress: String): Completable = this.unclaimBleDevice(deviceAddress).toCompletable()
-fun BleClient.unclaimBleDeviceObs(bleDevice: BleDevice): Completable = this.unclaimBleDevice(bleDevice).toCompletable()
+fun BleClient.unclaimBleDeviceObs(deviceAddress: String): Completable = UnClaimBleDeviceByAddressCompletable(this, deviceAddress)
+fun BleClient.unclaimBleDeviceObs(bleDevice: BleDevice): Completable = UnClaimBleDeviceCompletable(this, bleDevice)
 
-fun ConfigClient.createCustomDataTypeObs(request: DataTypeCreateRequest): Single<DataType> = this.createCustomDataType(request).toSingle()
-fun ConfigClient.disableFitObs(): Completable = this.disableFit().toCompletable()
-fun ConfigClient.readDataTypeObs(dataTypeName: String): Single<DataType> = this.readDataType(dataTypeName).toSingle()
+fun ConfigClient.createCustomDataTypeObs(request: DataTypeCreateRequest): Single<DataType> = CreateCustomDataTypeSingle(this, request)
+fun ConfigClient.disableFitObs(): Completable = DisableFitCompletable(this)
+fun ConfigClient.readDataTypeObs(dataTypeName: String): Single<DataType> = ReadDataTypeSingle(this, dataTypeName)
 
-fun GoalsClient.readCurrentGoalsObs(request: GoalsReadRequest): Single<List<Goal>> = this.readCurrentGoals(request).toSingle()
+fun GoalsClient.readCurrentGoalsObs(request: GoalsReadRequest): Single<List<Goal>> = ReadCurrentGoalsSingle(this, request)

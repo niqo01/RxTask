@@ -13,7 +13,6 @@ dependencies {
     implementation rootProject.ext.kotlinStdlib
 
     implementation project(':rx-location')
-    implementation project(':rx-task-kotlin')
     implementation rootProject.ext.rxJava
     implementation rootProject.ext.playServicesLocation
 }

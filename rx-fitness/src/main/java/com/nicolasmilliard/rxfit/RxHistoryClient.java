@@ -15,9 +15,6 @@ import com.google.android.gms.fitness.result.DataReadResponse;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 
-import static com.nicolasmilliard.rxtask.RxTask.completable;
-import static com.nicolasmilliard.rxtask.RxTask.single;
-
 public class RxHistoryClient {
 
     private final HistoryClient client;
@@ -28,41 +25,41 @@ public class RxHistoryClient {
 
     @NonNull
     public Single<DataReadResponse> readData(DataReadRequest request) {
-        return single(client.readData(request));
+        return new ReadDataSingle(client, request);
     }
 
     @NonNull
     public Single<DataSet> readDailyTotal(DataType request) {
-        return single(client.readDailyTotal(request));
+        return new ReadDailyTotalSingle(client, request);
     }
 
     @NonNull
     public Single<DataSet> readDailyTotalFromLocalDevice(DataType request) {
-        return single(client.readDailyTotalFromLocalDevice(request));
+        return new ReadDailyTotalFromLocalDeviceSingle(client, request);
     }
 
     @NonNull
     public Completable registerDataUpdateListener(DataUpdateListenerRegistrationRequest request) {
-        return completable(client.registerDataUpdateListener(request));
+        return new RegisterDataUpdateListenerCompletable(client, request);
     }
 
     @NonNull
     public Completable unregisterDataUpdateListener(PendingIntent request) {
-        return completable(client.unregisterDataUpdateListener(request));
+        return new UnRegisterDataUpdateListenerCompletable(client, request);
     }
 
     @NonNull
     public Completable insertData(DataSet dataSet) {
-        return completable(client.insertData(dataSet));
+        return new InsertDataCompletable(client, dataSet);
     }
 
     @NonNull
     public Completable updateData(DataUpdateRequest request) {
-        return completable(client.updateData(request));
+        return new UpdateDataCompletable(client, request);
     }
 
     @NonNull
     public Completable deleteData(DataDeleteRequest request) {
-        return completable(client.deleteData(request));
+        return new DeleteDataCompletable(client, request);
     }
 }

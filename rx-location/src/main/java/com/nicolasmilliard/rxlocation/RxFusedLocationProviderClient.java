@@ -15,8 +15,6 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
 
-import static com.nicolasmilliard.rxtask.RxTask.completable;
-import static com.nicolasmilliard.rxtask.RxTask.maybe;
 import static com.nicolasmilliard.rxtask.internal.Preconditions.checkNotNull;
 
 /**
@@ -37,12 +35,12 @@ public class RxFusedLocationProviderClient {
                     ".ACCESS_FINE_LOCATION"}
     )
     public Maybe<Location> getLastLocation() {
-        return maybe(client.getLastLocation());
+        return new LastLocationObservable(client);
     }
 
     @NonNull
     public Completable flushLocations() {
-        return completable(client.flushLocations());
+        return new FlushLocationCompletable(client);
     }
 
     @NonNull
@@ -51,7 +49,7 @@ public class RxFusedLocationProviderClient {
                     ".ACCESS_FINE_LOCATION"}
     )
     public Maybe<LocationAvailability> getLocationAvailability() {
-        return maybe(client.getLocationAvailability());
+        return new GetLocationAvailabilityMaybe(client);
     }
 
     @NonNull
@@ -60,7 +58,7 @@ public class RxFusedLocationProviderClient {
                     ".ACCESS_FINE_LOCATION"}
     )
     public Completable setMockLocation(Location location) {
-        return completable(client.setMockLocation(location));
+        return new MockLocationObservable(client, location);
     }
 
     @NonNull
@@ -69,7 +67,7 @@ public class RxFusedLocationProviderClient {
                     ".ACCESS_FINE_LOCATION"}
     )
     public Completable setMockMode(boolean isMockMode) {
-        return completable(client.setMockMode(isMockMode));
+        return new MockModeObservable(client, isMockMode);
     }
 
     @NonNull
@@ -78,7 +76,7 @@ public class RxFusedLocationProviderClient {
                     ".ACCESS_FINE_LOCATION"}
     )
     public Observable<LocationResult> requestLocationRequestUpdates(LocationRequest request) {
-        return new LocationResultObservable(client, request);
+        return new RequestLocationResultObservable(client, request);
     }
 
     @NonNull
@@ -88,7 +86,7 @@ public class RxFusedLocationProviderClient {
     )
     public Observable<LocationAvailability> requestLocationAvailabilityUpdates(LocationRequest
                                                                                        request) {
-        return new LocationAvailabilityObservable(client, request);
+        return new RequestLocationAvailabilityObservable(client, request);
     }
 
     @RequiresPermission(
@@ -97,7 +95,7 @@ public class RxFusedLocationProviderClient {
     )
     public Completable requestLocationUpdates(LocationRequest request, PendingIntent
             callbackIntent) {
-        return completable(client.requestLocationUpdates(request, callbackIntent));
+        return new RequestLocationUpdateCompletable(client, request, callbackIntent);
     }
 
     @RequiresPermission(
@@ -105,6 +103,6 @@ public class RxFusedLocationProviderClient {
                     ".ACCESS_FINE_LOCATION"}
     )
     public Completable removeLocationUpdates(PendingIntent callbackIntent) {
-        return completable(client.removeLocationUpdates(callbackIntent));
+        return new RemoveLocationUpdateCompletable(client, callbackIntent);
     }
 }

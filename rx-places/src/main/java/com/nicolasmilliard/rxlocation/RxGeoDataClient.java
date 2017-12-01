@@ -13,8 +13,6 @@ import com.google.android.gms.maps.model.LatLngBounds;
 
 import io.reactivex.Single;
 
-import static com.nicolasmilliard.rxtask.RxTask.single;
-
 public class RxGeoDataClient {
 
     private final GeoDataClient client;
@@ -27,28 +25,28 @@ public class RxGeoDataClient {
     public Single<AutocompletePredictionBufferResponse> getAutocompletePredictions(String query,
                                                                                    LatLngBounds
                                                                                            bounds, AutocompleteFilter filter) {
-        return single(client.getAutocompletePredictions(query, bounds, filter));
+        return new GetAutoCompletePredictionSingle(client, query, bounds, filter);
     }
 
     @NonNull
     public Single<PlacePhotoResponse> getPhoto(PlacePhotoMetadata photoMetadata) {
-        return single(client.getPhoto(photoMetadata));
+        return new GetPhotoSingle(client, photoMetadata);
     }
 
     @NonNull
     public Single<PlaceBufferResponse> getPlaceById(String... placeIds) {
-        return single(client.getPlaceById(placeIds));
+        return new GetPlaceByIdSingle(client, placeIds);
     }
 
     @NonNull
     public Single<PlacePhotoMetadataResponse> getPlacePhotos(String placeId) {
-        return single(client.getPlacePhotos(placeId));
+        return new GetPlacePhotosSingle(client, placeId);
     }
 
     @NonNull
     public Single<PlacePhotoResponse> getScaledPhoto(PlacePhotoMetadata photoMetadata, int width,
                                                      int height) {
-        return single(client.getScaledPhoto(photoMetadata, width, height));
+        return new GetScaledPhotoSingle(client, photoMetadata, width, height);
     }
 
 }

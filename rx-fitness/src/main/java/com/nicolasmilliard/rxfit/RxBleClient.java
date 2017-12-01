@@ -6,15 +6,12 @@ import android.support.annotation.RequiresPermission;
 import com.google.android.gms.fitness.BleClient;
 import com.google.android.gms.fitness.data.BleDevice;
 import com.google.android.gms.fitness.data.DataType;
-import com.google.android.gms.fitness.request.BleScanCallback;
 
 import java.util.List;
 
 import io.reactivex.Completable;
+import io.reactivex.Observable;
 import io.reactivex.Single;
-
-import static com.nicolasmilliard.rxtask.RxTask.completable;
-import static com.nicolasmilliard.rxtask.RxTask.single;
 
 public class RxBleClient {
 
@@ -26,38 +23,32 @@ public class RxBleClient {
 
     @NonNull
     public Completable claimBleDevice(String deviceAddress) {
-        return completable(client.claimBleDevice(deviceAddress));
+        return new ClaimBleDeviceByAddressCompletable(client, deviceAddress);
     }
 
     @NonNull
     public Completable claimBleDevice(BleDevice bleDevice) {
-        return completable(client.claimBleDevice(bleDevice));
+        return new ClaimBleDeviceCompletable(client, bleDevice);
     }
 
     @NonNull
     public Single<List<BleDevice>> listClaimedBleDevices() {
-        return single(client.listClaimedBleDevices());
+        return new ListClaimedBleDeviceSingle(client);
     }
 
     @NonNull
     @RequiresPermission("android.permission.BLUETOOTH_ADMIN")
-    public Completable startBleScan(List<DataType> dataTypes, int timeoutSecs, BleScanCallback
-            callback) {
-        return completable(client.startBleScan(dataTypes, timeoutSecs, callback));
-    }
-
-    @NonNull
-    public Single<Boolean> stopBleScan(BleScanCallback callback) {
-        return single(client.stopBleScan(callback));
+    public Observable<BleDevice> startBleScan(List<DataType> dataTypes, int timeoutSecs) {
+        return new StartBleScanObservable(client, dataTypes, timeoutSecs);
     }
 
     @NonNull
     public Completable unclaimBleDevice(String deviceAddress) {
-        return completable(client.unclaimBleDevice(deviceAddress));
+        return new UnClaimBleDeviceByAddressCompletable(client, deviceAddress);
     }
 
     @NonNull
     public Completable unclaimBleDevice(BleDevice bleDevice) {
-        return completable(client.unclaimBleDevice(bleDevice));
+        return new UnClaimBleDeviceCompletable(client, bleDevice);
     }
 }
