@@ -29,7 +29,6 @@ script:
 
 env:
   matrix:
-    - MODULE=rx-task
     - MODULE=rx-fitness
     - MODULE=rx-location
     - MODULE=rx-places
