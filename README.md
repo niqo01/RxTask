@@ -2,7 +2,7 @@ RxPlayServices
 =========
 
 RxJava binding API for Google Play Services and corresponding Kotlin extensions.  
-This project uses the new [GoogleApi][googleapi]introduced in version 11.6.0.
+This project uses the new [GoogleApi][googleapi] introduced in version 11.6.0.
 
 Download
 --------
