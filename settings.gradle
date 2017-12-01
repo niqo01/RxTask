@@ -1,7 +1,6 @@
 rootProject.name = 'rx-play-services-root'
 
 include ':rx-task',
-        ':rx-task-kotlin',
         ':rx-fitness',
         ':rx-fitness-kotlin',
         ':rx-location',

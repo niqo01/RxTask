@@ -10,7 +10,6 @@ import com.google.android.gms.location.ActivityRecognitionClient;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 
-import static com.nicolasmilliard.rxtask.RxTask.completable;
 import static com.nicolasmilliard.rxtask.internal.Preconditions.checkNotNull;
 
 /**
@@ -29,12 +28,13 @@ public class RxActivityRecognitionClient {
     @RequiresPermission("com.google.android.gms.permission.ACTIVITY_RECOGNITION")
     public Completable requestActivityUpdates(Long detectionIntervalMillis, PendingIntent
             callbackIntent) {
-        return completable(client.requestActivityUpdates(detectionIntervalMillis, callbackIntent));
+        return new RequestActivityUpdatesCompletable(client, detectionIntervalMillis,
+                callbackIntent);
     }
 
     @NonNull
     @RequiresPermission("com.google.android.gms.permission.ACTIVITY_RECOGNITION")
     public Completable removeActivityUpdates(PendingIntent callbackIntent) {
-        return completable(client.removeActivityUpdates(callbackIntent));
+        return new RemoveActivityUpdatesCompletable(client, callbackIntent);
     }
 }

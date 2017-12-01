@@ -34,7 +34,7 @@ class LocationResultObservableTest {
         `when`(mockClient!!.removeLocationUpdates(any(LocationCallback::class.java)))
                 .thenReturn(SuccessTaskStub<Void>(null))
 
-        val obs = LocationResultObservable(mockClient!!, LocationRequest.create())
+        val obs = RequestLocationResultObservable(mockClient!!, LocationRequest.create())
 
         val testObserver = obs.test()
 
@@ -81,7 +81,7 @@ class LocationResultObservableTest {
         `when`(mockClient!!.removeLocationUpdates(any(LocationCallback::class.java)))
                 .thenReturn(SuccessTaskStub<Void>(null))
 
-        val obs = LocationResultObservable(mockClient!!, LocationRequest.create())
+        val obs = RequestLocationResultObservable(mockClient!!, LocationRequest.create())
 
         val testObserver = obs.test()
 
@@ -107,7 +107,7 @@ class LocationResultObservableTest {
         `when`(mockClient!!.removeLocationUpdates(any(LocationCallback::class.java)))
                 .thenReturn(SuccessTaskStub<Void>(null))
 
-        val obs = LocationResultObservable(mockClient!!, LocationRequest.create())
+        val obs = RequestLocationResultObservable(mockClient!!, LocationRequest.create())
 
         val testObserver = obs.test()
 

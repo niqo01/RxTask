@@ -4,49 +4,46 @@ import android.app.PendingIntent
 import android.location.Location
 import android.support.annotation.RequiresPermission
 import com.google.android.gms.location.*
-import com.nicolasmilliard.rxtask.toCompletable
-import com.nicolasmilliard.rxtask.toMaybe
-import com.nicolasmilliard.rxtask.toSingle
 import io.reactivex.Completable
 import io.reactivex.Maybe
 import io.reactivex.Observable
 import io.reactivex.Single
 
 @RequiresPermission(anyOf = arrayOf("android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"))
-fun FusedLocationProviderClient.getLastLocationObs(): Maybe<Location> = this.lastLocation.toMaybe()
+fun FusedLocationProviderClient.getLastLocationObs(): Maybe<Location> = LastLocationObservable(this)
 
-fun FusedLocationProviderClient.flushLocationsObs(): Completable = this.flushLocations().toCompletable()
+fun FusedLocationProviderClient.flushLocationsObs(): Completable = FlushLocationCompletable(this)
 @RequiresPermission(anyOf = arrayOf("android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"))
-fun FusedLocationProviderClient.getLocationAvailabilityObs(): Maybe<LocationAvailability> = this.locationAvailability.toMaybe()
-
-@RequiresPermission(anyOf = arrayOf("android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"))
-fun FusedLocationProviderClient.setMockLocationObs(mock: Location): Completable = this.setMockLocation(mock).toCompletable()
+fun FusedLocationProviderClient.getLocationAvailabilityObs(): Maybe<LocationAvailability> = GetLocationAvailabilityMaybe(this)
 
 @RequiresPermission(anyOf = arrayOf("android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"))
-fun FusedLocationProviderClient.setMockModeObs(isMockMode: Boolean): Completable = this.setMockMode(isMockMode).toCompletable()
+fun FusedLocationProviderClient.setMockLocationObs(mock: Location): Completable = MockLocationObservable(this, mock)
 
 @RequiresPermission(anyOf = arrayOf("android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"))
-fun FusedLocationProviderClient.requestLocationRequestUpdatesObs(request: LocationRequest): Observable<LocationResult> = LocationResultObservable(this, request)
+fun FusedLocationProviderClient.setMockModeObs(isMockMode: Boolean): Completable = MockModeObservable(this, isMockMode)
 
 @RequiresPermission(anyOf = arrayOf("android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"))
-fun FusedLocationProviderClient.requestLocationAvailabilityUpdatesObs(request: LocationRequest): Observable<LocationAvailability> = LocationAvailabilityObservable(this, request)
+fun FusedLocationProviderClient.requestLocationRequestUpdatesObs(request: LocationRequest): Observable<LocationResult> = RequestLocationResultObservable(this, request)
 
 @RequiresPermission(anyOf = arrayOf("android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"))
-fun FusedLocationProviderClient.requestLocationUpdatesObs(request: LocationRequest, callbackIntent: PendingIntent): Completable = this.requestLocationUpdates(request, callbackIntent).toCompletable()
+fun FusedLocationProviderClient.requestLocationAvailabilityUpdatesObs(request: LocationRequest): Observable<LocationAvailability> = RequestLocationAvailabilityObservable(this, request)
 
-fun FusedLocationProviderClient.removeLocationUpdatesObs(callbackIntent: PendingIntent): Completable = this.removeLocationUpdates(callbackIntent).toCompletable()
+@RequiresPermission(anyOf = arrayOf("android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"))
+fun FusedLocationProviderClient.requestLocationUpdatesObs(request: LocationRequest, callbackIntent: PendingIntent): Completable = RequestLocationUpdateCompletable(this, request, callbackIntent)
 
-fun SettingsClient.checkLocationSettingsObs(request: LocationSettingsRequest): Single<LocationSettingsResponse> = this.checkLocationSettings(request).toSingle()
+fun FusedLocationProviderClient.removeLocationUpdatesObs(callbackIntent: PendingIntent): Completable = RemoveLocationUpdateCompletable(this, callbackIntent)
+
+fun SettingsClient.checkLocationSettingsObs(request: LocationSettingsRequest): Single<LocationSettingsResponse> = CheckLocationSettingsSingle(this, request)
 
 @RequiresPermission("android.permission.ACCESS_FINE_LOCATION")
-fun GeofencingClient.addGeofencesObs(request: GeofencingRequest, intent: PendingIntent): Completable = this.addGeofences(request, intent).toCompletable()
+fun GeofencingClient.addGeofencesObs(request: GeofencingRequest, intent: PendingIntent): Completable = AddGeofencesCompletable(this, request, intent)
 
-fun GeofencingClient.removeGeofencesObs(geofenceRequestIds: List<String>): Completable = this.removeGeofences(geofenceRequestIds).toCompletable()
+fun GeofencingClient.removeGeofencesObs(geofenceRequestIds: List<String>): Completable = RemoveGeofencesCompletable(this, geofenceRequestIds)
 
-fun GeofencingClient.removeGeofencesObs(pendingIntent: PendingIntent): Completable = this.removeGeofences(pendingIntent).toCompletable()
-
-@RequiresPermission("com.google.android.gms.permission.ACTIVITY_RECOGNITION")
-fun ActivityRecognitionClient.requestActivityUpdatesObs(detectionIntervalMillis: Long, callbackIntent: PendingIntent): Completable = this.requestActivityUpdates(detectionIntervalMillis, callbackIntent).toCompletable()
+fun GeofencingClient.removeGeofencesObs(pendingIntent: PendingIntent): Completable = RemoveGeofencesByIntentCompletable(this, pendingIntent)
 
 @RequiresPermission("com.google.android.gms.permission.ACTIVITY_RECOGNITION")
-fun ActivityRecognitionClient.requestActivityUpdatesObs(callbackIntent: PendingIntent): Completable = this.removeActivityUpdates(callbackIntent).toCompletable()
+fun ActivityRecognitionClient.requestActivityUpdatesObs(detectionIntervalMillis: Long, callbackIntent: PendingIntent): Completable = RequestActivityUpdatesCompletable(this, detectionIntervalMillis, callbackIntent)
+
+@RequiresPermission("com.google.android.gms.permission.ACTIVITY_RECOGNITION")
+fun ActivityRecognitionClient.removeActivityUpdatesObs(callbackIntent: PendingIntent): Completable = RemoveActivityUpdatesCompletable(this, callbackIntent)

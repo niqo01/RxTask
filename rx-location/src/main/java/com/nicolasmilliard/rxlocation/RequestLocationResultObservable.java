@@ -10,11 +10,11 @@ import com.google.android.gms.tasks.Task;
 import com.nicolasmilliard.rxtask.ObservableTask;
 import com.nicolasmilliard.rxtask.ObservableTaskCallback;
 
-final class LocationResultObservable extends ObservableTask<LocationResult> {
+final class RequestLocationResultObservable extends ObservableTask<LocationResult> {
     private final FusedLocationProviderClient client;
     private final LocationRequest request;
 
-    public LocationResultObservable(FusedLocationProviderClient client, LocationRequest request) {
+    public RequestLocationResultObservable(FusedLocationProviderClient client, LocationRequest request) {
         this.client = client;
         this.request = request;
     }

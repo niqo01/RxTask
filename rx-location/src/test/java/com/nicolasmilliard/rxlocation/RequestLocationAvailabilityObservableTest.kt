@@ -14,7 +14,7 @@ import org.mockito.Mockito.any
 import org.mockito.runners.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class LocationAvailabilityObservableTest {
+class RequestLocationAvailabilityObservableTest {
 
     @Mock
     var mockClient: FusedLocationProviderClient? = null
@@ -31,7 +31,7 @@ class LocationAvailabilityObservableTest {
         `when`(mockClient!!.removeLocationUpdates(any(LocationCallback::class.java)))
                 .thenReturn(SuccessTaskStub<Void>(null))
 
-        val obs = LocationAvailabilityObservable(mockClient!!, LocationRequest.create())
+        val obs = RequestLocationAvailabilityObservable(mockClient!!, LocationRequest.create())
 
         val testObserver = obs.test()
 
@@ -54,7 +54,7 @@ class LocationAvailabilityObservableTest {
         `when`(mockClient!!.removeLocationUpdates(any(LocationCallback::class.java)))
                 .thenReturn(SuccessTaskStub<Void>(null))
 
-        val obs = LocationAvailabilityObservable(mockClient!!, LocationRequest.create())
+        val obs = RequestLocationAvailabilityObservable(mockClient!!, LocationRequest.create())
 
         val testObserver = obs.test()
 

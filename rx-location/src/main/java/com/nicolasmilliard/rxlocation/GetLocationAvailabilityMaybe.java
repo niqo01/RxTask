@@ -9,11 +9,11 @@ import com.google.android.gms.tasks.Task;
 import com.nicolasmilliard.rxtask.MaybeTask;
 
 
-final class GetLocationAvailabilityObservable extends MaybeTask<LocationAvailability> {
+final class GetLocationAvailabilityMaybe extends MaybeTask<LocationAvailability> {
 
     final FusedLocationProviderClient client;
 
-    public GetLocationAvailabilityObservable(FusedLocationProviderClient client) {
+    public GetLocationAvailabilityMaybe(FusedLocationProviderClient client) {
         this.client = client;
     }
 

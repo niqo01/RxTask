@@ -12,11 +12,11 @@ import com.nicolasmilliard.rxtask.ObservableTaskCallback;
 
 import io.reactivex.Observer;
 
-final class LocationAvailabilityObservable extends ObservableTask<LocationAvailability> {
+final class RequestLocationAvailabilityObservable extends ObservableTask<LocationAvailability> {
     private final FusedLocationProviderClient client;
     private final LocationRequest request;
 
-    public LocationAvailabilityObservable(FusedLocationProviderClient client, LocationRequest
+    public RequestLocationAvailabilityObservable(FusedLocationProviderClient client, LocationRequest
             request) {
         this.client = client;
         this.request = request;
