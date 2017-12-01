@@ -1,15 +1,22 @@
 package com.nicolasmilliard.rxtask
 
+import com.google.android.gms.tasks.Task
 import org.junit.Test
 
 
 class TaskMaybeTest {
 
+    class MaybeTest(val task: Task<Any>) : MaybeTask<Any>() {
+        override fun run(): Task<Any> {
+            return task
+        }
+    }
+
     @Test
     fun testMaybeSuccess() {
         val value = ""
         var taskStub = SuccessTaskStub<Any>(value)
-        val taskMaybe = RxTask.maybe(taskStub)
+        val taskMaybe = MaybeTest(taskStub)
 
         val testObserver = taskMaybe.test()
 
@@ -24,7 +31,7 @@ class TaskMaybeTest {
     fun testMaybeComplete() {
         val value: Any? = null
         var taskStub = SuccessTaskStub(value)
-        val taskMaybe = RxTask.maybe(taskStub)
+        val taskMaybe = MaybeTest(taskStub)
 
         val testObserver = taskMaybe.test()
 
@@ -39,7 +46,7 @@ class TaskMaybeTest {
     @Test
     fun testMaybeFailure() {
         var taskStub = FailureTaskStub<Any>(Exception("Test"))
-        val taskMaybe = TaskMaybe(taskStub)
+        val taskMaybe = MaybeTest(taskStub)
 
         val testObserver = taskMaybe.test()
 
@@ -54,7 +61,7 @@ class TaskMaybeTest {
     fun testMaybeDispose() {
         var taskStub = SuccessTaskStub<Any>("")
 
-        val taskMaybe = RxTask.maybe(taskStub)
+        val taskMaybe = MaybeTest(taskStub)
 
         val testObserver = taskMaybe.test()
 

@@ -1,15 +1,23 @@
 package com.nicolasmilliard.rxtask
 
+import com.google.android.gms.tasks.Task
 import org.junit.Test
 
 
 class TaskSingleTest {
 
+    class SingleTest(val task: Task<Any>) : SingleTask<Any>() {
+        override fun run(): Task<Any> {
+            return task
+        }
+    }
+
     @Test
     fun testSingleSuccess() {
         val value = ""
         var taskStub = SuccessTaskStub<Any>(value)
-        val taskSingle = RxTask.single(taskStub)
+
+        val taskSingle = SingleTest(taskStub)
 
         val testObserver = taskSingle.test()
 
@@ -23,7 +31,7 @@ class TaskSingleTest {
     @Test
     fun testSingleFailure() {
         var taskStub = FailureTaskStub<Any>(Exception("Test"))
-        val taskSingle = RxTask.single(taskStub)
+        val taskSingle = SingleTest(taskStub)
 
         val testObserver = taskSingle.test()
 
@@ -38,7 +46,7 @@ class TaskSingleTest {
     fun testSingleDispose() {
         var taskStub = SuccessTaskStub<Any>("")
 
-        val taskSingle = RxTask.single(taskStub)
+        val taskSingle = SingleTest(taskStub)
 
         val testObserver = taskSingle.test()
 
