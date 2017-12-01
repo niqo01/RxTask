@@ -25,14 +25,14 @@ fun HistoryClient.insertDataObs(dataSet: DataSet): Completable = InsertDataCompl
 fun HistoryClient.updateDataObs(request: DataUpdateRequest): Completable = UpdateDataCompletable(this, request)
 fun HistoryClient.deleteDataObs(request: DataDeleteRequest): Completable = DeleteDataCompletable(this, request)
 
-fun BleClient.claimBleDeviceObs(deviceAddress: String): Completable = ClaimBleDeviceByAddressCompletable(this,  deviceAddress)
+fun BleClient.claimBleDeviceObs(deviceAddress: String): Completable = ClaimBleDeviceByAddressCompletable(this, deviceAddress)
 fun BleClient.claimBleDeviceObs(bleDevice: BleDevice): Completable = ClaimBleDeviceCompletable(this, bleDevice)
 fun BleClient.listClaimedBleDevicesObs(): Single<List<BleDevice>> = ListClaimedBleDeviceSingle(this)
 @RequiresPermission("android.permission.BLUETOOTH_ADMIN")
 fun BleClient.startBleScanObs(dataTypes: List<DataType>, timeoutSecs: Int, callback: BleScanCallback): Observable<BleDevice> = StartBleScanObservable(this, dataTypes, timeoutSecs)
 
 fun BleClient.unclaimBleDeviceObs(deviceAddress: String): Completable = UnClaimBleDeviceByAddressCompletable(this, deviceAddress)
-fun BleClient.unclaimBleDeviceObs(bleDevice: BleDevice): Completable = UnClaimBleDeviceCompletable(this,  bleDevice)
+fun BleClient.unclaimBleDeviceObs(bleDevice: BleDevice): Completable = UnClaimBleDeviceCompletable(this, bleDevice)
 
 fun ConfigClient.createCustomDataTypeObs(request: DataTypeCreateRequest): Single<DataType> = CreateCustomDataTypeSingle(this, request)
 fun ConfigClient.disableFitObs(): Completable = DisableFitCompletable(this)

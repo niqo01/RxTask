@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 
 import com.google.android.gms.fitness.HistoryClient;
-import com.google.android.gms.fitness.request.DataUpdateListenerRegistrationRequest;
 import com.google.android.gms.tasks.Task;
 import com.nicolasmilliard.rxtask.CompletableTask;
 

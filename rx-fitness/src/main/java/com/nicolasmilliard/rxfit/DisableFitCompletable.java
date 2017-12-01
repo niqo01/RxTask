@@ -1,11 +1,8 @@
 package com.nicolasmilliard.rxfit;
 
 import android.annotation.SuppressLint;
-import android.app.PendingIntent;
 
 import com.google.android.gms.fitness.ConfigClient;
-import com.google.android.gms.location.GeofencingClient;
-import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.tasks.Task;
 import com.nicolasmilliard.rxtask.CompletableTask;
 

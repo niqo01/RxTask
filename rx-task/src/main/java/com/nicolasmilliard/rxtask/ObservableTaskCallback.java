@@ -6,7 +6,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.exceptions.CompositeException;
 import io.reactivex.exceptions.Exceptions;
 import io.reactivex.plugins.RxJavaPlugins;
@@ -15,16 +14,13 @@ public final class ObservableTaskCallback<T> extends ObservableDisposable implem
         OnCompleteListener<Void> {
 
     private final Observer<? super T> observer;
+    Dispose listener;
 
     public ObservableTaskCallback(Observer<? super T> observer) {
         this.observer = observer;
     }
 
-    public interface Dispose {
-        void onDispose();
-    }
-    Dispose listener;
-    public void setDisposeListener(Dispose listener){
+    public void setDisposeListener(Dispose listener) {
         this.listener = listener;
     }
 
@@ -41,20 +37,24 @@ public final class ObservableTaskCallback<T> extends ObservableDisposable implem
         }
     }
 
-    public void onComplete(){
+    public void onComplete() {
         if (isDisposed()) return;
         observer.onComplete();
     }
 
-    public void onNext(T value){
+    public void onNext(T value) {
         if (isDisposed()) return;
         observer.onNext(value);
     }
 
     @Override
     protected void onDispose() {
-        if (listener != null){
+        if (listener != null) {
             listener.onDispose();
         }
+    }
+
+    public interface Dispose {
+        void onDispose();
     }
 }

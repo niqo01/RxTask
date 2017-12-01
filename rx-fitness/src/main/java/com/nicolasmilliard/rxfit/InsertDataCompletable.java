@@ -1,7 +1,6 @@
 package com.nicolasmilliard.rxfit;
 
 import android.annotation.SuppressLint;
-import android.app.PendingIntent;
 
 import com.google.android.gms.fitness.HistoryClient;
 import com.google.android.gms.fitness.data.DataSet;

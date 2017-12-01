@@ -10,8 +10,6 @@ import com.google.android.gms.tasks.Task;
 import com.nicolasmilliard.rxtask.ObservableTask;
 import com.nicolasmilliard.rxtask.ObservableTaskCallback;
 
-import io.reactivex.Observer;
-
 final class RequestLocationAvailabilityObservable extends ObservableTask<LocationAvailability> {
     private final FusedLocationProviderClient client;
     private final LocationRequest request;

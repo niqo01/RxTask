@@ -1,10 +1,7 @@
 package com.nicolasmilliard.rxfit;
 
 import com.google.android.gms.fitness.BleClient;
-import com.google.android.gms.fitness.SensorsClient;
 import com.google.android.gms.fitness.data.BleDevice;
-import com.google.android.gms.fitness.data.DataSource;
-import com.google.android.gms.fitness.request.DataSourcesRequest;
 import com.google.android.gms.tasks.Task;
 import com.nicolasmilliard.rxtask.SingleTask;
 

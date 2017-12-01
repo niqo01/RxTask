@@ -6,8 +6,6 @@ import com.google.android.gms.tasks.Task;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 
-import static com.nicolasmilliard.rxtask.internal.Preconditions.checkNotNull;
-
 public abstract class ObservableTask<T> extends Observable<T> {
 
     ObservableTaskCallback<T> callback;

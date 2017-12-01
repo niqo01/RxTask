@@ -1,10 +1,7 @@
 package com.nicolasmilliard.rxtask;
 
 
-import com.google.android.gms.tasks.Task;
-
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicReference;
 
 import io.reactivex.disposables.Disposable;
 
@@ -15,7 +12,7 @@ abstract class ObservableDisposable implements Disposable {
 
     @Override
     public void dispose() {
-        if (unsubscribed.getAndSet(true)){
+        if (unsubscribed.getAndSet(true)) {
             onDispose();
         }
     }

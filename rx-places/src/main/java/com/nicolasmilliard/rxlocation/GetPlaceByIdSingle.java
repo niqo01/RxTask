@@ -2,8 +2,6 @@ package com.nicolasmilliard.rxlocation;
 
 import com.google.android.gms.location.places.GeoDataClient;
 import com.google.android.gms.location.places.PlaceBufferResponse;
-import com.google.android.gms.location.places.PlacePhotoMetadata;
-import com.google.android.gms.location.places.PlacePhotoResponse;
 import com.google.android.gms.tasks.Task;
 import com.nicolasmilliard.rxtask.SingleTask;
 

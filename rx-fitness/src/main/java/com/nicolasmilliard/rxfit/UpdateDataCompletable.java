@@ -3,7 +3,6 @@ package com.nicolasmilliard.rxfit;
 import android.annotation.SuppressLint;
 
 import com.google.android.gms.fitness.HistoryClient;
-import com.google.android.gms.fitness.data.DataSet;
 import com.google.android.gms.fitness.request.DataUpdateRequest;
 import com.google.android.gms.tasks.Task;
 import com.nicolasmilliard.rxtask.CompletableTask;

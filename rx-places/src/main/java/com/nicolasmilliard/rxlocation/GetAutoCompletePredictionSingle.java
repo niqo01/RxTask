@@ -1,7 +1,5 @@
 package com.nicolasmilliard.rxlocation;
 
-import android.annotation.SuppressLint;
-
 import com.google.android.gms.location.places.AutocompleteFilter;
 import com.google.android.gms.location.places.AutocompletePredictionBufferResponse;
 import com.google.android.gms.location.places.GeoDataClient;
@@ -14,8 +12,8 @@ final class GetAutoCompletePredictionSingle extends SingleTask<AutocompletePredi
 
     final GeoDataClient client;
     final String query;
-             final LatLngBounds bounds;
-             final AutocompleteFilter filter;
+    final LatLngBounds bounds;
+    final AutocompleteFilter filter;
 
     public GetAutoCompletePredictionSingle(GeoDataClient client, String query, LatLngBounds bounds, AutocompleteFilter filter) {
         this.client = client;

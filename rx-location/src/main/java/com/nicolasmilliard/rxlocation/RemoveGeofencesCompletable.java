@@ -1,7 +1,5 @@
 package com.nicolasmilliard.rxlocation;
 
-import android.annotation.SuppressLint;
-
 import com.google.android.gms.location.GeofencingClient;
 import com.google.android.gms.tasks.Task;
 import com.nicolasmilliard.rxtask.CompletableTask;

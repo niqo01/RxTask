@@ -1,9 +1,6 @@
 package com.nicolasmilliard.rxfit;
 
-import android.annotation.SuppressLint;
-
 import com.google.android.gms.fitness.BleClient;
-import com.google.android.gms.fitness.data.BleDevice;
 import com.google.android.gms.tasks.Task;
 import com.nicolasmilliard.rxtask.CompletableTask;
 
