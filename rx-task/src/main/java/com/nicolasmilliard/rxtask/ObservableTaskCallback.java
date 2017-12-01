@@ -41,6 +41,11 @@ public final class ObservableTaskCallback<T> extends ObservableDisposable implem
         }
     }
 
+    public void onComplete(){
+        if (isDisposed()) return;
+        observer.onComplete();
+    }
+
     public void onNext(T value){
         if (isDisposed()) return;
         observer.onNext(value);
