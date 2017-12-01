@@ -7,11 +7,6 @@ This project uses the new [GoogleApi][googleapi]introduced in version 11.6.0.
 Download
 --------
 
-[Task][task] library bindings:
-```groovy
-implementation 'com.github.niqo01.rxplayservices:rx-play-services-task:0.1.0'
-```
-
 'play-services-location' library bindings:
 ```groovy
 implementation 'com.github.niqo01.rxplayservices:rx-play-services-location:0.1.0'
@@ -32,24 +27,6 @@ Kotlin extension methods for all of the above libraries are available by appendi
 `rx-play-services-task-kotlin`.
 
 Snapshots of the development version are available in [Sonatype's `snapshots` repository][snap].
-
-
-RxTask
---------
-
-Lightweight wrapper for the Google play services [Tasks][task] API.
-
-Java sample:
-```java
-    PlaceDetectionClient client = Places.getPlaceDetectionClient(context, null);
-    Single<PlaceLikelihoodBufferResponse> single = RxTask.single(client.getCurrentPlace(null));
-```
-
-Kotlin sample:
-```kotlin
-    val client = Places.getPlaceDetectionClient(context, null)
-    val single = client.getCurrentPlace(null).toSingle();
-```
 
 
 RxLocation
