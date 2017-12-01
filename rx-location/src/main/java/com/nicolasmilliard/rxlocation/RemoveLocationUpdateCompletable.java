@@ -18,7 +18,6 @@ final class RemoveLocationUpdateCompletable extends CompletableTask {
         this.callbackIntent = callbackIntent;
     }
 
-    @SuppressLint("MissingPermission")
     @Override
     protected Task<Void> run() {
         return client.removeLocationUpdates(callbackIntent);

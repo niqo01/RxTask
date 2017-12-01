@@ -98,10 +98,6 @@ public class RxFusedLocationProviderClient {
         return new RequestLocationUpdateCompletable(client, request, callbackIntent);
     }
 
-    @RequiresPermission(
-            anyOf = {"android.permission.ACCESS_COARSE_LOCATION", "android.permission" +
-                    ".ACCESS_FINE_LOCATION"}
-    )
     public Completable removeLocationUpdates(PendingIntent callbackIntent) {
         return new RemoveLocationUpdateCompletable(client, callbackIntent);
     }
