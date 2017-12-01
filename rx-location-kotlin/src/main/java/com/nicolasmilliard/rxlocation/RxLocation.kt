@@ -46,7 +46,7 @@ fun SettingsClient.checkLocationSettingsObs(request: LocationSettingsRequest): S
 
 @RequiresPermission("android.permission.ACCESS_FINE_LOCATION")
 fun GeofencingClient.addGeofencesObs(request: GeofencingRequest, intent: PendingIntent): Completable
-        = RxGeofencingClient(this).addGeofences(request,intent)
+        = RxGeofencingClient(this).addGeofences(request, intent)
 
 fun GeofencingClient.removeGeofencesObs(geofenceRequestIds: List<String>): Completable
         = RxGeofencingClient(this).removeGeofences(geofenceRequestIds)
