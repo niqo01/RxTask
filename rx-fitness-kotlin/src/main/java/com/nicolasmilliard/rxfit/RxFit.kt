@@ -11,31 +11,63 @@ import io.reactivex.Observable
 import io.reactivex.Single
 
 
-fun SensorsClient.readDataObs(request: SensorRequest): Observable<DataPoint> = SensorObservable(this, request)
-fun SensorsClient.findDataSourcesObs(request: DataSourcesRequest): Single<List<DataSource>> = FindDataSourcesSingle(this, request)
+fun SensorsClient.readDataObs(request: SensorRequest): Observable<DataPoint>
+        = RxSensorsClient(this).readData(request)
 
-fun HistoryClient.readDataObs(request: DataReadRequest): Single<DataReadResponse> = ReadDataSingle(this, request)
-fun HistoryClient.readDailyTotalObs(request: DataType): Single<DataSet> = ReadDailyTotalSingle(this, request)
-fun HistoryClient.readDailyTotalFromLocalDeviceObs(request: DataType): Single<DataSet> = ReadDailyTotalFromLocalDeviceSingle(this, request)
+fun SensorsClient.findDataSourcesObs(request: DataSourcesRequest): Single<List<DataSource>>
+        = RxSensorsClient(this).findDataSources(request)
 
-fun HistoryClient.registerDataUpdateListenerObs(request: DataUpdateListenerRegistrationRequest): Completable = RegisterDataUpdateListenerCompletable(this, request)
-fun HistoryClient.unregisterDataUpdateListenerObs(request: PendingIntent): Completable = UnRegisterDataUpdateListenerCompletable(this, request)
+fun HistoryClient.readDataObs(request: DataReadRequest): Single<DataReadResponse>
+        = RxHistoryClient(this).readData(request)
 
-fun HistoryClient.insertDataObs(dataSet: DataSet): Completable = InsertDataCompletable(this, dataSet)
-fun HistoryClient.updateDataObs(request: DataUpdateRequest): Completable = UpdateDataCompletable(this, request)
-fun HistoryClient.deleteDataObs(request: DataDeleteRequest): Completable = DeleteDataCompletable(this, request)
+fun HistoryClient.readDailyTotalObs(request: DataType): Single<DataSet>
+        = RxHistoryClient(this).readDailyTotal(request)
 
-fun BleClient.claimBleDeviceObs(deviceAddress: String): Completable = ClaimBleDeviceByAddressCompletable(this, deviceAddress)
-fun BleClient.claimBleDeviceObs(bleDevice: BleDevice): Completable = ClaimBleDeviceCompletable(this, bleDevice)
-fun BleClient.listClaimedBleDevicesObs(): Single<List<BleDevice>> = ListClaimedBleDeviceSingle(this)
+fun HistoryClient.readDailyTotalFromLocalDeviceObs(request: DataType): Single<DataSet>
+        = RxHistoryClient(this).readDailyTotalFromLocalDevice(request)
+
+fun HistoryClient.registerDataUpdateListenerObs(request: DataUpdateListenerRegistrationRequest): Completable
+        = RxHistoryClient(this).registerDataUpdateListener(request)
+
+fun HistoryClient.unregisterDataUpdateListenerObs(request: PendingIntent): Completable
+        = RxHistoryClient(this).unregisterDataUpdateListener(request)
+
+fun HistoryClient.insertDataObs(dataSet: DataSet): Completable
+        = RxHistoryClient(this).insertData(dataSet)
+
+fun HistoryClient.updateDataObs(request: DataUpdateRequest): Completable
+        = RxHistoryClient(this).updateData(request)
+
+fun HistoryClient.deleteDataObs(request: DataDeleteRequest): Completable
+        = RxHistoryClient(this).deleteData(request)
+
+fun BleClient.claimBleDeviceObs(deviceAddress: String): Completable
+        = RxBleClient(this).claimBleDevice(deviceAddress)
+
+fun BleClient.claimBleDeviceObs(bleDevice: BleDevice): Completable
+        = RxBleClient(this).claimBleDevice(bleDevice)
+
+fun BleClient.listClaimedBleDevicesObs(): Single<List<BleDevice>>
+        = RxBleClient(this).listClaimedBleDevices()
+
 @RequiresPermission("android.permission.BLUETOOTH_ADMIN")
-fun BleClient.startBleScanObs(dataTypes: List<DataType>, timeoutSecs: Int, callback: BleScanCallback): Observable<BleDevice> = StartBleScanObservable(this, dataTypes, timeoutSecs)
+fun BleClient.startBleScanObs(dataTypes: List<DataType>, timeoutSecs: Int): Observable<BleDevice>
+        = RxBleClient(this).startBleScan(dataTypes, timeoutSecs)
 
-fun BleClient.unclaimBleDeviceObs(deviceAddress: String): Completable = UnClaimBleDeviceByAddressCompletable(this, deviceAddress)
-fun BleClient.unclaimBleDeviceObs(bleDevice: BleDevice): Completable = UnClaimBleDeviceCompletable(this, bleDevice)
+fun BleClient.unclaimBleDeviceObs(deviceAddress: String): Completable
+        = RxBleClient(this).unclaimBleDevice(deviceAddress)
 
-fun ConfigClient.createCustomDataTypeObs(request: DataTypeCreateRequest): Single<DataType> = CreateCustomDataTypeSingle(this, request)
-fun ConfigClient.disableFitObs(): Completable = DisableFitCompletable(this)
-fun ConfigClient.readDataTypeObs(dataTypeName: String): Single<DataType> = ReadDataTypeSingle(this, dataTypeName)
+fun BleClient.unclaimBleDeviceObs(bleDevice: BleDevice): Completable
+        = RxBleClient(this).unclaimBleDevice(bleDevice)
 
-fun GoalsClient.readCurrentGoalsObs(request: GoalsReadRequest): Single<List<Goal>> = ReadCurrentGoalsSingle(this, request)
+fun ConfigClient.createCustomDataTypeObs(request: DataTypeCreateRequest): Single<DataType>
+        = RxConfigClient(this).createCustomDataType(request)
+
+fun ConfigClient.disableFitObs(): Completable
+        = RxConfigClient(this).disableFit()
+
+fun ConfigClient.readDataTypeObs(dataTypeName: String): Single<DataType>
+        = RxConfigClient(this).readDataType(dataTypeName)
+
+fun GoalsClient.readCurrentGoalsObs(request: GoalsReadRequest): Single<List<Goal>>
+        = RxGoalsClient(this).readCurrentGoals(request)
