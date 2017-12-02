@@ -27,6 +27,11 @@ implementation 'com.github.niqo01.rxplayservices:rx-play-services-fitness:0.2.0'
 implementation 'com.github.niqo01.rxplayservices:rx-play-services-wallet:0.2.0'
 ```
 
+'rx-play-services-auth' library bindings:
+```groovy
+implementation 'com.github.niqo01.rxplayservices:rx-play-services-auth:0.2.0'
+```
+
 Snapshots of the development version are available in [Sonatype's `snapshots` repository][snap].
 
 

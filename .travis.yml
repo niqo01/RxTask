@@ -32,6 +32,8 @@ env:
     - MODULE=rx-fitness
     - MODULE=rx-location
     - MODULE=rx-places
+    - MODULE=rx-wallet
+    - MODULE=rx-auth
 
 notifications:
   email: false
