@@ -22,13 +22,18 @@ implementation 'com.github.niqo01.rxplayservices:rx-play-services-places:0.2.0'
 implementation 'com.github.niqo01.rxplayservices:rx-play-services-fitness:0.2.0'
 ```
 
+'rx-play-services-wallet' library bindings:
+```groovy
+implementation 'com.github.niqo01.rxplayservices:rx-play-services-wallet:0.2.0'
+```
+
 Snapshots of the development version are available in [Sonatype's `snapshots` repository][snap].
 
 
-RxLocation
+API Example
 --------
 
-Sample:
+### Location
 ```java
     RxFusedLocationProviderClient rxClient = new
             RxFusedLocationProviderClient(context);
@@ -36,8 +41,7 @@ Sample:
             .requestLocationRequestUpdates(LocationRequest.create());
 ```
 
-RxPlaces
---------
+### Places
 
 Sample:
 ```java
@@ -47,8 +51,7 @@ Sample:
 ```
 
 
-RxFitness
---------
+### Fitness
 
 Sample:
 ```java

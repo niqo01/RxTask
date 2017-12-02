@@ -4,5 +4,6 @@ include ':rx-task',
         ':rx-fitness',
         ':rx-location',
         ':rx-places',
+        ':rx-wallet',
         ':sample',
         ':testing-utils'
