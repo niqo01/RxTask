@@ -1,7 +1,7 @@
 RxPlayServices
 =========
 
-RxJava binding API for Google Play Services and corresponding Kotlin extensions.  
+RxJava 2 binding API for Google Play Services and corresponding Kotlin extensions.  
 This project uses the new [GoogleApi][googleapi] introduced in version 11.6.0.
 
 Download
@@ -9,17 +9,17 @@ Download
 
 'play-services-location' library bindings:
 ```groovy
-implementation 'com.github.niqo01.rxplayservices:rx-play-services-location:0.1.0'
+implementation 'com.github.niqo01.rxplayservices:rx-play-services-location:0.2.0'
 ```
 
 'play-services-places' library bindings:
 ```groovy
-implementation 'com.github.niqo01.rxplayservices:rx-play-services-places:0.1.0'
+implementation 'com.github.niqo01.rxplayservices:rx-play-services-places:0.2.0'
 ```
 
 'rx-play-services-fitness' library bindings:
 ```groovy
-implementation 'com.github.niqo01.rxplayservices:rx-play-services-fitness:0.1.0'
+implementation 'com.github.niqo01.rxplayservices:rx-play-services-fitness:0.2.0'
 ```
 
 Kotlin extension methods for all of the above libraries are available by appending `-kotlin` to the
