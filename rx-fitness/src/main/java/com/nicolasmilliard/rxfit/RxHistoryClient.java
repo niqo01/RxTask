@@ -15,6 +15,8 @@ import com.google.android.gms.fitness.request.DataReadRequest;
 import com.google.android.gms.fitness.request.DataUpdateListenerRegistrationRequest;
 import com.google.android.gms.fitness.request.DataUpdateRequest;
 import com.google.android.gms.fitness.result.DataReadResponse;
+import com.nicolasmilliard.rxtask.CompletableTask;
+import com.nicolasmilliard.rxtask.SingleTask;
 
 import io.reactivex.Completable;
 import io.reactivex.Single;
@@ -32,41 +34,41 @@ public class RxHistoryClient {
 
     @NonNull
     public Single<DataReadResponse> readData(DataReadRequest request) {
-        return new ReadDataSingle(client, request);
+        return SingleTask.create(() -> client.readData(request));
     }
 
     @NonNull
     public Single<DataSet> readDailyTotal(DataType request) {
-        return new ReadDailyTotalSingle(client, request);
+        return SingleTask.create(() -> client.readDailyTotal(request));
     }
 
     @NonNull
     public Single<DataSet> readDailyTotalFromLocalDevice(DataType request) {
-        return new ReadDailyTotalFromLocalDeviceSingle(client, request);
+        return SingleTask.create(() -> client.readDailyTotalFromLocalDevice(request));
     }
 
     @NonNull
     public Completable registerDataUpdateListener(DataUpdateListenerRegistrationRequest request) {
-        return new RegisterDataUpdateListenerCompletable(client, request);
+        return CompletableTask.create(() -> client.registerDataUpdateListener(request));
     }
 
     @NonNull
     public Completable unregisterDataUpdateListener(PendingIntent request) {
-        return new UnRegisterDataUpdateListenerCompletable(client, request);
+        return CompletableTask.create(() -> client.unregisterDataUpdateListener(request));
     }
 
     @NonNull
     public Completable insertData(DataSet dataSet) {
-        return new InsertDataCompletable(client, dataSet);
+        return CompletableTask.create(() -> client.insertData(dataSet));
     }
 
     @NonNull
     public Completable updateData(DataUpdateRequest request) {
-        return new UpdateDataCompletable(client, request);
+        return CompletableTask.create(() -> client.updateData(request));
     }
 
     @NonNull
     public Completable deleteData(DataDeleteRequest request) {
-        return new DeleteDataCompletable(client, request);
+        return CompletableTask.create(() -> client.deleteData(request));
     }
 }

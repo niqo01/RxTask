@@ -9,6 +9,8 @@ import com.google.android.gms.fitness.ConfigClient;
 import com.google.android.gms.fitness.Fitness;
 import com.google.android.gms.fitness.data.DataType;
 import com.google.android.gms.fitness.request.DataTypeCreateRequest;
+import com.nicolasmilliard.rxtask.CompletableTask;
+import com.nicolasmilliard.rxtask.SingleTask;
 
 import io.reactivex.Completable;
 import io.reactivex.Single;
@@ -26,16 +28,16 @@ public class RxConfigClient {
 
     @NonNull
     public Single<DataType> createCustomDataType(DataTypeCreateRequest request) {
-        return new CreateCustomDataTypeSingle(client, request);
+        return SingleTask.create(() -> client.createCustomDataType(request));
     }
 
     @NonNull
     public Completable disableFit() {
-        return new DisableFitCompletable(client);
+        return CompletableTask.create(() -> client.disableFit());
     }
 
     @NonNull
     public Single<DataType> readDataType(String dataTypeName) {
-        return new ReadDataTypeSingle(client, dataTypeName);
+        return SingleTask.create(() -> client.readDataType(dataTypeName));
     }
 }

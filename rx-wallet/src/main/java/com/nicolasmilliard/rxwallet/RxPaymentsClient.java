@@ -8,6 +8,7 @@ import com.google.android.gms.wallet.PaymentData;
 import com.google.android.gms.wallet.PaymentDataRequest;
 import com.google.android.gms.wallet.PaymentsClient;
 import com.google.android.gms.wallet.Wallet;
+import com.nicolasmilliard.rxtask.SingleTask;
 
 import io.reactivex.Single;
 
@@ -25,11 +26,11 @@ public class RxPaymentsClient {
 
     @NonNull
     public Single<Boolean> isReadyToPay(IsReadyToPayRequest request) {
-        return new IsReadyToPaySingle(client, request);
+        return SingleTask.create(() -> client.isReadyToPay(request));
     }
 
     @NonNull
     public Single<PaymentData> loadPaymentData(PaymentDataRequest request) {
-        return new LoadPaymentDataSingle(client, request);
+        return SingleTask.create(() -> client.loadPaymentData(request));
     }
 }

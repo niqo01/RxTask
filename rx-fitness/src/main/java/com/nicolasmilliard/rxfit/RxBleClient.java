@@ -10,6 +10,8 @@ import com.google.android.gms.fitness.BleClient;
 import com.google.android.gms.fitness.Fitness;
 import com.google.android.gms.fitness.data.BleDevice;
 import com.google.android.gms.fitness.data.DataType;
+import com.nicolasmilliard.rxtask.CompletableTask;
+import com.nicolasmilliard.rxtask.SingleTask;
 
 import java.util.List;
 
@@ -30,17 +32,17 @@ public class RxBleClient {
 
     @NonNull
     public Completable claimBleDevice(String deviceAddress) {
-        return new ClaimBleDeviceByAddressCompletable(client, deviceAddress);
+        return CompletableTask.create(() -> client.claimBleDevice(deviceAddress));
     }
 
     @NonNull
     public Completable claimBleDevice(BleDevice bleDevice) {
-        return new ClaimBleDeviceCompletable(client, bleDevice);
+        return CompletableTask.create(() -> client.claimBleDevice(bleDevice));
     }
 
     @NonNull
     public Single<List<BleDevice>> listClaimedBleDevices() {
-        return new ListClaimedBleDeviceSingle(client);
+        return SingleTask.create(() -> client.listClaimedBleDevices());
     }
 
     @NonNull
@@ -51,11 +53,11 @@ public class RxBleClient {
 
     @NonNull
     public Completable unclaimBleDevice(String deviceAddress) {
-        return new UnClaimBleDeviceByAddressCompletable(client, deviceAddress);
+        return CompletableTask.create(() -> client.unclaimBleDevice(deviceAddress));
     }
 
     @NonNull
     public Completable unclaimBleDevice(BleDevice bleDevice) {
-        return new UnClaimBleDeviceCompletable(client, bleDevice);
+        return CompletableTask.create(() -> client.unclaimBleDevice(bleDevice));
     }
 }

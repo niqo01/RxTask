@@ -12,6 +12,10 @@ import com.google.android.gms.location.LocationAvailability;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.Task;
+import com.nicolasmilliard.rxtask.CompletableTask;
+import com.nicolasmilliard.rxtask.MaybeTask;
+import com.nicolasmilliard.rxtask.TaskSupplier;
 
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
@@ -37,12 +41,12 @@ public class RxFusedLocationProviderClient {
                     ".ACCESS_FINE_LOCATION"}
     )
     public Maybe<Location> getLastLocation() {
-        return new LastLocationObservable(client);
+        return MaybeTask.create(() -> client.getLastLocation());
     }
 
     @NonNull
     public Completable flushLocations() {
-        return new FlushLocationCompletable(client);
+        return CompletableTask.create(() -> client.flushLocations());
     }
 
     @NonNull
@@ -51,7 +55,7 @@ public class RxFusedLocationProviderClient {
                     ".ACCESS_FINE_LOCATION"}
     )
     public Maybe<LocationAvailability> getLocationAvailability() {
-        return new GetLocationAvailabilityMaybe(client);
+        return MaybeTask.create(() -> client.getLocationAvailability());
     }
 
     @NonNull
@@ -60,7 +64,7 @@ public class RxFusedLocationProviderClient {
                     ".ACCESS_FINE_LOCATION"}
     )
     public Completable setMockLocation(Location location) {
-        return new MockLocationObservable(client, location);
+        return CompletableTask.create(() -> client.setMockLocation(location));
     }
 
     @NonNull
@@ -69,7 +73,7 @@ public class RxFusedLocationProviderClient {
                     ".ACCESS_FINE_LOCATION"}
     )
     public Completable setMockMode(boolean isMockMode) {
-        return new MockModeObservable(client, isMockMode);
+        return CompletableTask.create(() -> client.setMockMode(isMockMode));
     }
 
     @NonNull
@@ -97,10 +101,10 @@ public class RxFusedLocationProviderClient {
     )
     public Completable requestLocationUpdates(LocationRequest request, PendingIntent
             callbackIntent) {
-        return new RequestLocationUpdateCompletable(client, request, callbackIntent);
+        return CompletableTask.create(() -> client.requestLocationUpdates(request, callbackIntent));
     }
 
     public Completable removeLocationUpdates(PendingIntent callbackIntent) {
-        return new RemoveLocationUpdateCompletable(client, callbackIntent);
+        return CompletableTask.create(() -> client.removeLocationUpdates(callbackIntent));
     }
 }

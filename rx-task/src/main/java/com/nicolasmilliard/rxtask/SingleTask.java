@@ -7,6 +7,16 @@ import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 
 public abstract class SingleTask<T> extends Single<T> {
+
+    public static <S> SingleTask<S> create(TaskSupplier<Task<S>> taskSupplier){
+        return new SingleTask<S>() {
+            @Override
+            protected Task<S> run() {
+                return taskSupplier.get();
+            }
+        };
+    }
+
     @Override
     protected void subscribeActual(SingleObserver<? super T> observer) {
         Task<T> task = run();

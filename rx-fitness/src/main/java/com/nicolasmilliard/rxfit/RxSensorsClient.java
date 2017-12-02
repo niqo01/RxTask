@@ -11,6 +11,7 @@ import com.google.android.gms.fitness.data.DataPoint;
 import com.google.android.gms.fitness.data.DataSource;
 import com.google.android.gms.fitness.request.DataSourcesRequest;
 import com.google.android.gms.fitness.request.SensorRequest;
+import com.nicolasmilliard.rxtask.SingleTask;
 
 import java.util.List;
 
@@ -35,6 +36,6 @@ public class RxSensorsClient {
 
     @NonNull
     public Single<List<DataSource>> findDataSources(DataSourcesRequest request) {
-        return new FindDataSourcesSingle(client, request);
+        return SingleTask.create(() -> client.findDataSources(request));
     }
 }

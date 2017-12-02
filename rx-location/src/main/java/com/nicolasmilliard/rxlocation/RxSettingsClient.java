@@ -8,6 +8,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.location.SettingsClient;
+import com.nicolasmilliard.rxtask.SingleTask;
 
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -28,6 +29,6 @@ public class RxSettingsClient {
 
     @NonNull
     public Single<LocationSettingsResponse> checkLocationSettings(LocationSettingsRequest request) {
-        return new CheckLocationSettingsSingle(client, request);
+        return SingleTask.create(() -> client.checkLocationSettings(request));
     }
 }

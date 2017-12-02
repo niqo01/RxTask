@@ -8,6 +8,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.nicolasmilliard.rxtask.CompletableTask;
+import com.nicolasmilliard.rxtask.SingleTask;
 
 import io.reactivex.Completable;
 import io.reactivex.Single;
@@ -31,16 +33,16 @@ public class RxGoogleSignInClient {
 
     @NonNull
     public Completable revokeAccess() {
-        return new RevokeAccessCompletable(client);
+        return CompletableTask.create(() -> client.revokeAccess());
     }
 
     @NonNull
     public Completable signOut() {
-        return new SignOutCompletable(client);
+        return CompletableTask.create(() -> client.signOut());
     }
 
     @NonNull
     public Single<GoogleSignInAccount> silentSignIn() {
-        return new SilentSignInSingle(client);
+        return SingleTask.create(() -> client.silentSignIn());
     }
 }

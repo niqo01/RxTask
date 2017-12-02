@@ -9,6 +9,7 @@ import com.google.android.gms.fitness.Fitness;
 import com.google.android.gms.fitness.GoalsClient;
 import com.google.android.gms.fitness.data.Goal;
 import com.google.android.gms.fitness.request.GoalsReadRequest;
+import com.nicolasmilliard.rxtask.SingleTask;
 
 import java.util.List;
 
@@ -27,6 +28,6 @@ public class RxGoalsClient {
 
     @NonNull
     public Single<List<Goal>> readCurrentGoals(GoalsReadRequest request) {
-        return new ReadCurrentGoalsSingle(client, request);
+        return SingleTask.create(() -> client.readCurrentGoals(request));
     }
 }
