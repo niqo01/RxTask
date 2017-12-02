@@ -1,6 +1,8 @@
 package com.nicolasmilliard.rxlocation;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.google.android.gms.location.places.AutocompleteFilter;
 import com.google.android.gms.location.places.AutocompletePredictionBufferResponse;
@@ -9,16 +11,21 @@ import com.google.android.gms.location.places.PlaceBufferResponse;
 import com.google.android.gms.location.places.PlacePhotoMetadata;
 import com.google.android.gms.location.places.PlacePhotoMetadataResponse;
 import com.google.android.gms.location.places.PlacePhotoResponse;
+import com.google.android.gms.location.places.Places;
+import com.google.android.gms.location.places.PlacesOptions;
 import com.google.android.gms.maps.model.LatLngBounds;
 
 import io.reactivex.Single;
+
+import static com.nicolasmilliard.rxtask.internal.Preconditions.checkNotNull;
 
 public class RxGeoDataClient {
 
     private final GeoDataClient client;
 
-    public RxGeoDataClient(GeoDataClient client) {
-        this.client = client;
+    public RxGeoDataClient(@NonNull Context context, @Nullable PlacesOptions options) {
+        checkNotNull(context, "context == null");
+        this.client = Places.getGeoDataClient(context, options);
     }
 
     @NonNull

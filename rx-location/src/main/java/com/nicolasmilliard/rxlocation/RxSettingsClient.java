@@ -1,8 +1,10 @@
 package com.nicolasmilliard.rxlocation;
 
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.location.SettingsClient;
@@ -19,9 +21,9 @@ public class RxSettingsClient {
 
     private final SettingsClient client;
 
-    public RxSettingsClient(@NonNull SettingsClient client) {
-        checkNotNull(client, "client == null");
-        this.client = client;
+    public RxSettingsClient(@NonNull Context context) {
+        checkNotNull(context, "context == null");
+        this.client = LocationServices.getSettingsClient(context);
     }
 
     @NonNull

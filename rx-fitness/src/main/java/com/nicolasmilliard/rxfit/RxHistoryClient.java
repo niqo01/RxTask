@@ -1,8 +1,12 @@
 package com.nicolasmilliard.rxfit;
 
 import android.app.PendingIntent;
+import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.fitness.Fitness;
 import com.google.android.gms.fitness.HistoryClient;
 import com.google.android.gms.fitness.data.DataSet;
 import com.google.android.gms.fitness.data.DataType;
@@ -15,12 +19,15 @@ import com.google.android.gms.fitness.result.DataReadResponse;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 
+import static com.nicolasmilliard.rxtask.internal.Preconditions.checkNotNull;
+
 public class RxHistoryClient {
 
     private final HistoryClient client;
 
-    public RxHistoryClient(HistoryClient client) {
-        this.client = client;
+    public RxHistoryClient(@NonNull Context context, @Nullable GoogleSignInAccount account) {
+        checkNotNull(context, "context == null");
+        this.client = Fitness.getHistoryClient(context, account);
     }
 
     @NonNull

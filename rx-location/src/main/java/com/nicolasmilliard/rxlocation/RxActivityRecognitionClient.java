@@ -2,9 +2,11 @@ package com.nicolasmilliard.rxlocation;
 
 
 import android.app.PendingIntent;
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresPermission;
 
+import com.google.android.gms.location.ActivityRecognition;
 import com.google.android.gms.location.ActivityRecognitionClient;
 
 import io.reactivex.Completable;
@@ -19,9 +21,9 @@ public class RxActivityRecognitionClient {
 
     private final ActivityRecognitionClient client;
 
-    public RxActivityRecognitionClient(@NonNull ActivityRecognitionClient client) {
-        checkNotNull(client, "client == null");
-        this.client = client;
+    public RxActivityRecognitionClient(@NonNull Context context) {
+        checkNotNull(context, "context == null");
+        this.client = ActivityRecognition.getClient(context);
     }
 
     @NonNull

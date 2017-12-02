@@ -2,6 +2,7 @@ package com.nicolasmilliard.rxlocation;
 
 
 import android.app.PendingIntent;
+import android.content.Context;
 import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresPermission;
@@ -10,6 +11,7 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationAvailability;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
 
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
@@ -24,9 +26,9 @@ public class RxFusedLocationProviderClient {
 
     private final FusedLocationProviderClient client;
 
-    public RxFusedLocationProviderClient(@NonNull FusedLocationProviderClient client) {
-        checkNotNull(client, "client == null");
-        this.client = client;
+    public RxFusedLocationProviderClient(@NonNull Context context) {
+        checkNotNull(context, "context == null");
+        this.client = LocationServices.getFusedLocationProviderClient(context);
     }
 
     @NonNull

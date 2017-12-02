@@ -1,6 +1,5 @@
 package com.nicolasmilliard.rxlocation;
 
-import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
