@@ -38,7 +38,7 @@ android {
 }
 
 dependencies {
-    implementation project(':rx-location-kotlin')
+    implementation project(':rx-location')
     implementation rootProject.ext.playServicesLocation
     implementation rootProject.ext.kotlinStdlib
     implementation rootProject.ext.rxJava

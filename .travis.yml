@@ -21,10 +21,10 @@ before_install:
   - echo no | avdmanager create avd --force -n test -k "system-images;android-18;default;armeabi-v7a"
   - $ANDROID_HOME/emulator/emulator -avd test -no-audio -no-window &
 
-install: ./gradlew ":$MODULE:assemble" ":$MODULE-kotlin:assemble" --stacktrace
+install: ./gradlew ":$MODULE:assemble" --stacktrace
 
 script:
-  - ./gradlew ":$MODULE:build" ":$MODULE-kotlin:build" --stacktrace
+  - ./gradlew ":$MODULE:build" --stacktrace
 
 
 env:

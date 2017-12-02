@@ -2,10 +2,7 @@ rootProject.name = 'rx-play-services-root'
 
 include ':rx-task',
         ':rx-fitness',
-        ':rx-fitness-kotlin',
         ':rx-location',
-        ':rx-location-kotlin',
         ':rx-places',
-        ':rx-places-kotlin',
         ':sample',
         ':testing-utils'

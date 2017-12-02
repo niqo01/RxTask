@@ -1,6 +1,7 @@
 package com.nicolasmilliard.rxplayservices
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.IntentSender
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -11,8 +12,8 @@ import android.support.v7.app.AppCompatActivity
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
-import com.nicolasmilliard.rxlocation.checkLocationSettingsObs
-import com.nicolasmilliard.rxlocation.requestLocationRequestUpdatesObs
+import com.nicolasmilliard.rxlocation.RxFusedLocationProviderClient
+import com.nicolasmilliard.rxlocation.RxSettingsClient
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -23,8 +24,8 @@ class MainActivity : AppCompatActivity() {
     private val REQUEST_CHECK_SETTINGS: Int = 1001
     private val PERMISSIONS_REQUEST_FINE_LOCATION: Int = 1002
 
-    lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-    lateinit var settingsClient: SettingsClient
+    lateinit var fusedLocationProviderClient: RxFusedLocationProviderClient
+    lateinit var settingsClient: RxSettingsClient
 
     private val disposables: CompositeDisposable = CompositeDisposable()
 
@@ -38,8 +39,8 @@ class MainActivity : AppCompatActivity() {
                     .setAction("Action", null).show()
         }
 
-        fusedLocationProviderClient = FusedLocationProviderClient(application)
-        settingsClient = SettingsClient(application)
+        fusedLocationProviderClient = RxFusedLocationProviderClient(application)
+        settingsClient = RxSettingsClient(application)
 
         checkPermission()
     }
@@ -49,11 +50,12 @@ class MainActivity : AppCompatActivity() {
         disposables.clear()
     }
 
+    @SuppressLint("MissingPermission")
     private fun checkSettings() {
         val settingsRequest = LocationSettingsRequest.Builder()
                 .addLocationRequest(getLocationRequest()).build()
-        disposables.add(settingsClient.checkLocationSettingsObs(settingsRequest)
-                .flatMapObservable { fusedLocationProviderClient.requestLocationRequestUpdatesObs(getLocationRequest()) }
+        disposables.add(settingsClient.checkLocationSettings(settingsRequest)
+                .flatMapObservable { fusedLocationProviderClient.requestLocationRequestUpdates(getLocationRequest()) }
                 .take(2)
                 .subscribe(this::updateViews, this::handleException))
     }
