@@ -1,7 +1,7 @@
 RxPlayServices
 =========
 
-RxJava 2 binding API for Google Play Services and corresponding Kotlin extensions.  
+RxJava 2 binding API for Google Play Services.  
 This project uses the new [GoogleApi][googleapi] introduced in version 11.6.0.
 
 Download
@@ -22,59 +22,37 @@ implementation 'com.github.niqo01.rxplayservices:rx-play-services-places:0.2.0'
 implementation 'com.github.niqo01.rxplayservices:rx-play-services-fitness:0.2.0'
 ```
 
-Kotlin extension methods for all of the above libraries are available by appending `-kotlin` to the
-'artifactId' of the dependency. For example, `rx-play-services-task` becomes
-`rx-play-services-task-kotlin`.
-
 Snapshots of the development version are available in [Sonatype's `snapshots` repository][snap].
 
 
 RxLocation
 --------
 
-Java sample:
+Sample:
 ```java
-    FusedLocationProviderClient client = LocationServices
-            .getFusedLocationProviderClient(context);
     RxFusedLocationProviderClient rxClient = new
-            RxFusedLocationProviderClient(client);
+            RxFusedLocationProviderClient(context);
     Observable<LocationResult> result = rxClient
             .requestLocationRequestUpdates(LocationRequest.create());
-```
-
-Kotlin sample:
-```kotlin
-    val client = LocationServices
-            .getFusedLocationProviderClient(context)
-    val result: Observable<LocationResult> = client
-            .requestLocationRequestUpdatesObs(LocationRequest.create())
 ```
 
 RxPlaces
 --------
 
-Java sample:
+Sample:
 ```java
-    PlaceDetectionClient client = Places.getPlaceDetectionClient(context, null);
-    RxPlaceDetectionClient rxClient = new RxPlaceDetectionClient(client);
+    RxPlaceDetectionClient rxClient = new RxPlaceDetectionClient(context, null);
     Single<PlaceLikelihoodBufferResponse> currentPlace = rxClient
             .getCurrentPlace(null);
 ```
 
-Kotlin sample:
-```kotlin
-val client = Places.getPlaceDetectionClient(context, null)
-val currentPlace: Single<PlaceLikelihoodBufferResponse> = client
-            .getCurrentPlaceObs(null)
-```
 
 RxFitness
 --------
 
-Java sample:
+Sample:
 ```java
-    SensorsClient client = Fitness.getSensorsClient(context, signInAccount);
-    RxSensorsClient rxClient = new RxSensorsClient(client);
+    RxSensorsClient rxClient = new RxSensorsClient(context, signInAccount);
     SensorRequest request = new SensorRequest.Builder()
             .setDataType(DataType
             .TYPE_CALORIES_EXPENDED)
@@ -82,15 +60,6 @@ Java sample:
     Observable<DataPoint> dataPointObservable = rxClient.readData(request);
 ```
 
-Kotlin sample:
-```kotlin
-    val client = Fitness.getSensorsClient(context, signInAccount)
-    val request = SensorRequest.Builder()
-            .setDataType(DataType
-                    .TYPE_CALORIES_EXPENDED)
-            .build()
-    val dataPointObservable: Observable<DataPoint> = client.readDataObs(request)
-```
 
 License
 -------
