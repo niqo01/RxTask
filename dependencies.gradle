@@ -17,6 +17,8 @@ ext {
     playServicesFitness = "com.google.android.gms:play-services-fitness:$playServices"
     playServicesLocation = "com.google.android.gms:play-services-location:$playServices"
     playServicesPlaces = "com.google.android.gms:play-services-places:$playServices"
+    playServicesWallet = "com.google.android.gms:play-services-wallet:$playServices"
+    playServicesAuth = "com.google.android.gms:play-services-auth:$playServices"
 
     rxJava = 'io.reactivex.rxjava2:rxjava:2.1.6'
     junit = 'junit:junit:4.12'

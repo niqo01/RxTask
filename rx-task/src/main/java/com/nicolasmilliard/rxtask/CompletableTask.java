@@ -3,10 +3,22 @@ package com.nicolasmilliard.rxtask;
 
 import com.google.android.gms.tasks.Task;
 
+import java.util.function.Supplier;
+
 import io.reactivex.Completable;
 import io.reactivex.CompletableObserver;
 
 public abstract class CompletableTask extends Completable {
+
+    public static CompletableTask create(TaskSupplier<Task<Void>> taskSupplier){
+        return new CompletableTask() {
+            @Override
+            protected Task<Void> run() {
+                return taskSupplier.get();
+            }
+        };
+    }
+
     @Override
     protected void subscribeActual(CompletableObserver observer) {
         Task<Void> task = run();

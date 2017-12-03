@@ -9,6 +9,9 @@ import android.support.annotation.RequiresPermission;
 import com.google.android.gms.location.GeofencingClient;
 import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.Task;
+import com.nicolasmilliard.rxtask.CompletableTask;
+import com.nicolasmilliard.rxtask.TaskSupplier;
 
 import java.util.List;
 
@@ -32,16 +35,16 @@ public class RxGeofencingClient {
     @NonNull
     @RequiresPermission("android.permission.ACCESS_FINE_LOCATION")
     public Completable addGeofences(GeofencingRequest request, PendingIntent intent) {
-        return new AddGeofencesCompletable(client, request, intent);
+        return CompletableTask.create(() -> client.addGeofences(request, intent));
     }
 
     @NonNull
     public Completable removeGeofences(List<String> geofenceRequestIds) {
-        return new RemoveGeofencesCompletable(client, geofenceRequestIds);
+        return CompletableTask.create(() -> client.removeGeofences(geofenceRequestIds));
     }
 
     @NonNull
     public Completable removeGeofences(PendingIntent pendingIntent) {
-        return new RemoveGeofencesByIntentCompletable(client, pendingIntent);
+        return CompletableTask.create(() -> client.removeGeofences(pendingIntent));
     }
 }
