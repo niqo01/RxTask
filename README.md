@@ -26,27 +26,19 @@ implementation 'com.github.niqo01.rxplayservices:rx-play-services-task:0.3.0'
 The following projects leverage RxTask and wrap the new [GoogleApi][googleapi] introduced 
 in version 11.6.0.
 
-##### Download
-```groovy
-implementation 'com.github.niqo01.rxplayservices:rx-play-services-auth:0.3.0'
-```
-```groovy
-implementation 'com.github.niqo01.rxplayservices:rx-play-services-location:0.3.0'
-```
-```groovy
-implementation 'com.github.niqo01.rxplayservices:rx-play-services-places:0.3.0'
-```
-```groovy
-implementation 'com.github.niqo01.rxplayservices:rx-play-services-fitness:0.3.0'
-```
-```groovy
-implementation 'com.github.niqo01.rxplayservices:rx-play-services-wallet:0.3.0'
-```
 
-##### Example
+| API | Dependency |
+| --- | --- |
+| Auth | com.github.niqo01.rxplayservices:rx-play-services-auth:0.3.0 |
+| Location | com.github.niqo01.rxplayservices:rx-play-services-location:0.3.0 |
+| Places | com.github.niqo01.rxplayservices:rx-play-services-places:0.3.0 |
+| Fitness | com.github.niqo01.rxplayservices:rx-play-services-fitness:0.3.0 |
+| Wallet | com.github.niqo01.rxplayservices:rx-play-services-wallet:0.3.0 |
+
+
+##### Location Example
 ```java
-    RxFusedLocationProviderClient rxClient = new
-            RxFusedLocationProviderClient(context);
+    RxFusedLocationProviderClient rxClient = new RxFusedLocationProviderClient(context);
     Observable<LocationResult> result = rxClient
             .requestLocationRequestUpdates(LocationRequest.create());
 ```
