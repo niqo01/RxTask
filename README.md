@@ -8,12 +8,12 @@ RxTask
 RxTask is an easy to use lightweight binding for the Google Play Services [Task][task] APIs.  
 It can be use standalone or bundled with one of the GoogleAPIs helper project provided. 
 
-#####Download
+##### Download
 ```groovy
 implementation 'com.github.niqo01.rxplayservices:rx-play-services-task:0.3.0'
 ```
 
-#####Example
+##### Example
 ```java
     GoogleSignInClient client = GoogleSignIn.getClient(context, options);
     Single<GoogleSignInAccount> silentSignIn = SingleTask.create(() -> client.silentSignIn());
@@ -21,11 +21,12 @@ implementation 'com.github.niqo01.rxplayservices:rx-play-services-task:0.3.0'
     Completable revokeAccess = CompletableTask.create(() -> client.revokeAccess());
 ```
 
-###GoogleAPIs
+### GoogleAPIs
 
-The projects below uses the new [GoogleApi][googleapi] introduced in version 11.6.0.
+The following projects leverage RxTask and wrap the new [GoogleApi][googleapi] introduced 
+in version 11.6.0.
 
-#####Download
+##### Download
 ```groovy
 implementation 'com.github.niqo01.rxplayservices:rx-play-services-auth:0.3.0'
 ```
