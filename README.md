@@ -1,44 +1,48 @@
 RxPlayServices
 =========
 
-RxJava 2 binding API for Google Play Services.  
-This project uses the new [GoogleApi][googleapi] introduced in version 11.6.0.
+RxJava 2 binding API for Google Play Services [Task][task] API.  
 
-Download
+RxTask
 --------
+RxTask is an easy to use lightweight binding for the Google Play Services [Task][task] APIs.  
+It can be use standalone or bundled with one of the GoogleAPIs helper project provided. 
 
-'play-services-location' library bindings:
+#####Download
 ```groovy
-implementation 'com.github.niqo01.rxplayservices:rx-play-services-location:0.2.0'
+implementation 'com.github.niqo01.rxplayservices:rx-play-services-task:0.3.0'
 ```
 
-'play-services-places' library bindings:
-```groovy
-implementation 'com.github.niqo01.rxplayservices:rx-play-services-places:0.2.0'
+#####Example
+```java
+    GoogleSignInClient client = GoogleSignIn.getClient(context, options);
+    Single<GoogleSignInAccount> silentSignIn = SingleTask.create(() -> client.silentSignIn());
+    ...
+    Completable revokeAccess = CompletableTask.create(() -> client.revokeAccess());
 ```
 
-'rx-play-services-fitness' library bindings:
+###GoogleAPIs
+
+The projects below uses the new [GoogleApi][googleapi] introduced in version 11.6.0.
+
+#####Download
 ```groovy
-implementation 'com.github.niqo01.rxplayservices:rx-play-services-fitness:0.2.0'
+implementation 'com.github.niqo01.rxplayservices:rx-play-services-auth:0.3.0'
+```
+```groovy
+implementation 'com.github.niqo01.rxplayservices:rx-play-services-location:0.3.0'
+```
+```groovy
+implementation 'com.github.niqo01.rxplayservices:rx-play-services-places:0.3.0'
+```
+```groovy
+implementation 'com.github.niqo01.rxplayservices:rx-play-services-fitness:0.3.0'
+```
+```groovy
+implementation 'com.github.niqo01.rxplayservices:rx-play-services-wallet:0.3.0'
 ```
 
-'rx-play-services-wallet' library bindings:
-```groovy
-implementation 'com.github.niqo01.rxplayservices:rx-play-services-wallet:0.2.0'
-```
-
-'rx-play-services-auth' library bindings:
-```groovy
-implementation 'com.github.niqo01.rxplayservices:rx-play-services-auth:0.2.0'
-```
-
-Snapshots of the development version are available in [Sonatype's `snapshots` repository][snap].
-
-
-API Example
---------
-
-### Location
+##### Example
 ```java
     RxFusedLocationProviderClient rxClient = new
             RxFusedLocationProviderClient(context);
@@ -46,28 +50,10 @@ API Example
             .requestLocationRequestUpdates(LocationRequest.create());
 ```
 
-### Places
 
-Sample:
-```java
-    RxPlaceDetectionClient rxClient = new RxPlaceDetectionClient(context, null);
-    Single<PlaceLikelihoodBufferResponse> currentPlace = rxClient
-            .getCurrentPlace(null);
-```
-
-
-### Fitness
-
-Sample:
-```java
-    RxSensorsClient rxClient = new RxSensorsClient(context, signInAccount);
-    SensorRequest request = new SensorRequest.Builder()
-            .setDataType(DataType
-            .TYPE_CALORIES_EXPENDED)
-            .build();
-    Observable<DataPoint> dataPointObservable = rxClient.readData(request);
-```
-
+Snapshots
+-------
+Snapshots of the development version are available in [Sonatype's `snapshots` repository][snap].
 
 License
 -------
