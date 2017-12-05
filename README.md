@@ -1,12 +1,10 @@
-RxPlayServices
+RxTask
 =========
 
-RxJava 2 binding API for Google Play Services [Task][task] API.  
+RxJava 2 binding API for Google Play Services [Task][task] APIs.  
 
-RxTask
---------
-RxTask is an easy to use lightweight binding for the Google Play Services [Task][task] APIs.  
-It can be use standalone or bundled with one of the GoogleAPIs helper project provided. 
+RxTask can be use standalone for any Google or Firebase APIs returning Task or, 
+bundled with one of the GoogleAPIs helper project provided. 
 
 ##### Download
 ```groovy
