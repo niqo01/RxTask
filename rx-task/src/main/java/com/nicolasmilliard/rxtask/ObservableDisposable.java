@@ -12,7 +12,7 @@ abstract class ObservableDisposable implements Disposable {
 
     @Override
     public void dispose() {
-        if (unsubscribed.getAndSet(true)) {
+        if (unsubscribed.compareAndSet(false, true)) {
             onDispose();
         }
     }

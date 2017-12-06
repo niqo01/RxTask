@@ -8,11 +8,18 @@ import io.reactivex.Observer;
 
 public abstract class ObservableTask<T> extends Observable<T> {
 
-    ObservableTaskCallback<T> callback;
+    public static <S> ObservableTask<S> create(ObservableTaskSupplier<S> taskSupplier){
+        return new ObservableTask<S>() {
+            @Override
+            protected Task<Void> run(ObservableTaskCallback<S> callback) {
+                return taskSupplier.get(callback);
+            }
+        };
+    }
 
     @Override
     protected void subscribeActual(Observer<? super T> observer) {
-        callback = new ObservableTaskCallback(observer);
+        ObservableTaskCallback<T> callback = new ObservableTaskCallback(observer);
         observer.onSubscribe(callback);
 
         Task<Void> task = run(callback);

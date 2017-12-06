@@ -9,13 +9,13 @@ import android.support.annotation.RequiresPermission;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationAvailability;
+import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.Task;
 import com.nicolasmilliard.rxtask.CompletableTask;
 import com.nicolasmilliard.rxtask.MaybeTask;
-import com.nicolasmilliard.rxtask.TaskSupplier;
+import com.nicolasmilliard.rxtask.ObservableTask;
 
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
@@ -82,7 +82,17 @@ public class RxFusedLocationProviderClient {
                     ".ACCESS_FINE_LOCATION"}
     )
     public Observable<LocationResult> requestLocationRequestUpdates(LocationRequest request) {
-        return new RequestLocationResultObservable(client, request);
+        return ObservableTask.create(callback -> {
+            LocationCallback resultCallback = new LocationCallback() {
+                @Override
+                public void onLocationResult(LocationResult result) {
+                    super.onLocationResult(result);
+                    callback.onNext(result);
+                }
+            };
+            callback.setDisposeListener(() -> client.removeLocationUpdates(resultCallback));
+            return client.requestLocationUpdates(request, resultCallback, null);
+        });
     }
 
     @NonNull
@@ -92,7 +102,18 @@ public class RxFusedLocationProviderClient {
     )
     public Observable<LocationAvailability> requestLocationAvailabilityUpdates(LocationRequest
                                                                                        request) {
-        return new RequestLocationAvailabilityObservable(client, request);
+        return ObservableTask.create(callback -> {
+            LocationCallback resultCallback = new LocationCallback() {
+                @Override
+                public void onLocationAvailability(LocationAvailability locationAvailability) {
+                    super.onLocationAvailability(locationAvailability);
+                    callback.onNext(locationAvailability);
+                }
+            };
+            callback.setDisposeListener(() -> client.removeLocationUpdates(resultCallback));
+            return client.requestLocationUpdates(request, resultCallback, null);
+
+        });
     }
 
     @RequiresPermission(
