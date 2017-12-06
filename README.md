@@ -8,7 +8,7 @@ bundled with one of the GoogleAPIs helper project provided.
 
 ##### Download
 ```groovy
-implementation 'com.github.niqo01.rxplayservices:rx-play-services-task:0.3.0'
+implementation 'com.github.niqo01.rxplayservices:rx-play-services-task:0.4.0'
 ```
 
 ##### Example
@@ -27,11 +27,11 @@ in version 11.6.0.
 
 | API | Dependency |
 | --- | --- |
-| Auth | com.github.niqo01.rxplayservices:rx-play-services-auth:0.3.0 |
-| Location | com.github.niqo01.rxplayservices:rx-play-services-location:0.3.0 |
-| Places | com.github.niqo01.rxplayservices:rx-play-services-places:0.3.0 |
-| Fitness | com.github.niqo01.rxplayservices:rx-play-services-fitness:0.3.0 |
-| Wallet | com.github.niqo01.rxplayservices:rx-play-services-wallet:0.3.0 |
+| Auth | com.github.niqo01.rxplayservices:rx-play-services-auth:0.4.0 |
+| Location | com.github.niqo01.rxplayservices:rx-play-services-location:0.4.0 |
+| Places | com.github.niqo01.rxplayservices:rx-play-services-places:0.4.0 |
+| Fitness | com.github.niqo01.rxplayservices:rx-play-services-fitness:0.4.0 |
+| Wallet | com.github.niqo01.rxplayservices:rx-play-services-wallet:0.4.0 |
 
 
 ##### Location Example
