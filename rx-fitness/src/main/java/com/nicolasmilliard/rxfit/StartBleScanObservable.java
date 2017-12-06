@@ -30,8 +30,7 @@ final class StartBleScanObservable extends ObservableTask<BleDevice> {
     protected Task<Void> run(ObservableTaskCallback<BleDevice> callback) {
         ResultCallback resultCallback = new ResultCallback(callback);
         callback.setDisposeListener(() -> client.stopBleScan(resultCallback));
-        return client.startBleScan(dataTypes, timeoutSecs, resultCallback)
-                .addOnCompleteListener(callback);
+        return client.startBleScan(dataTypes, timeoutSecs, resultCallback);
     }
 
     static final class ResultCallback extends BleScanCallback {
