@@ -24,8 +24,7 @@ final class RequestLocationResultObservable extends ObservableTask<LocationResul
     protected Task<Void> run(ObservableTaskCallback<LocationResult> callback) {
         ResultCallback resultCallback = new ResultCallback(callback);
         callback.setDisposeListener(() -> client.removeLocationUpdates(resultCallback));
-        return client.requestLocationUpdates(this.request, resultCallback, null)
-                .addOnCompleteListener(callback);
+        return client.requestLocationUpdates(this.request, resultCallback, null);
     }
 
     static final class ResultCallback extends LocationCallback {

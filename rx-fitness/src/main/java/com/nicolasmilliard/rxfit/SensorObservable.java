@@ -22,7 +22,6 @@ final class SensorObservable extends ObservableTask<DataPoint> {
     protected Task<Void> run(ObservableTaskCallback<DataPoint> callback) {
         OnDataPointListener listener = dataPoint -> callback.onNext(dataPoint);
         callback.setDisposeListener(() -> this.client.remove(listener));
-        return client.add(this.request, listener)
-                .addOnCompleteListener(callback);
+        return client.add(this.request, listener);
     }
 }
