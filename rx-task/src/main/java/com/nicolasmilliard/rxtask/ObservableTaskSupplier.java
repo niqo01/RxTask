@@ -3,12 +3,12 @@ package com.nicolasmilliard.rxtask;
 
 import com.google.android.gms.tasks.Task;
 
-public interface TaskSupplier<T extends Task> {
+public interface ObservableTaskSupplier<T> {
 
     /**
      * Supply here the task to run.
      *
      * @return a Task
      */
-    T get();
+    Task<Void> get(ObservableTaskCallback<T> callback);
 }

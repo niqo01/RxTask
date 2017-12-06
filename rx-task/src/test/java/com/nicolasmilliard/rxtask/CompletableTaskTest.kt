@@ -4,7 +4,7 @@ import com.google.android.gms.tasks.Task
 import org.junit.Test
 
 
-class TaskCompletableTest {
+class CompletableTaskTest {
 
     class CompletableTest(val task: Task<Void>) : CompletableTask() {
         override fun run(): Task<Void> {

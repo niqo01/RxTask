@@ -10,7 +10,9 @@ import com.google.android.gms.fitness.BleClient;
 import com.google.android.gms.fitness.Fitness;
 import com.google.android.gms.fitness.data.BleDevice;
 import com.google.android.gms.fitness.data.DataType;
+import com.google.android.gms.fitness.request.BleScanCallback;
 import com.nicolasmilliard.rxtask.CompletableTask;
+import com.nicolasmilliard.rxtask.ObservableTask;
 import com.nicolasmilliard.rxtask.SingleTask;
 
 import java.util.List;
@@ -48,7 +50,21 @@ public class RxBleClient {
     @NonNull
     @RequiresPermission("android.permission.BLUETOOTH_ADMIN")
     public Observable<BleDevice> startBleScan(List<DataType> dataTypes, int timeoutSecs) {
-        return new StartBleScanObservable(client, dataTypes, timeoutSecs);
+        return ObservableTask.create(callback -> {
+            BleScanCallback bleCallBack = new BleScanCallback() {
+                @Override
+                public void onDeviceFound(BleDevice bleDevice) {
+                    callback.onNext(bleDevice);
+                }
+
+                @Override
+                public void onScanStopped() {
+                    callback.onComplete();
+                }
+            };
+            callback.setDisposeListener(() -> client.stopBleScan(bleCallBack));
+            return client.startBleScan(dataTypes, timeoutSecs, bleCallBack);
+        });
     }
 
     @NonNull

@@ -10,7 +10,9 @@ import com.google.android.gms.fitness.SensorsClient;
 import com.google.android.gms.fitness.data.DataPoint;
 import com.google.android.gms.fitness.data.DataSource;
 import com.google.android.gms.fitness.request.DataSourcesRequest;
+import com.google.android.gms.fitness.request.OnDataPointListener;
 import com.google.android.gms.fitness.request.SensorRequest;
+import com.nicolasmilliard.rxtask.ObservableTask;
 import com.nicolasmilliard.rxtask.SingleTask;
 
 import java.util.List;
@@ -31,7 +33,11 @@ public class RxSensorsClient {
 
     @NonNull
     public Observable<DataPoint> readData(SensorRequest request) {
-        return new SensorObservable(client, request);
+        return ObservableTask.create(callback -> {
+            OnDataPointListener listener = dataPoint -> callback.onNext(dataPoint);
+            callback.setDisposeListener(() -> client.remove(listener));
+            return client.add(request, listener);
+        });
     }
 
     @NonNull
