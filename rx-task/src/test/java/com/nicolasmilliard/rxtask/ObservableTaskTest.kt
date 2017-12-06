@@ -7,7 +7,7 @@ import org.junit.runner.RunWith
 import org.mockito.runners.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class TaskObservableTest {
+class ObservableTaskTest {
 
 
     @Test
@@ -75,7 +75,7 @@ class TaskObservableTest {
         failureTask.complete()
 
         testObserver.assertFailure(Exception::class.java)
-        
+
     }
 
     @Test

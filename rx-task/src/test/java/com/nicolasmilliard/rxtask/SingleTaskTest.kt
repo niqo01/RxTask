@@ -4,7 +4,7 @@ import com.google.android.gms.tasks.Task
 import org.junit.Test
 
 
-class TaskSingleTest {
+class SingleTaskTest {
 
     class SingleTest(val task: Task<Any>) : SingleTask<Any>() {
         override fun run(): Task<Any> {

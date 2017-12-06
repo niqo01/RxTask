@@ -4,7 +4,7 @@ import com.google.android.gms.tasks.Task
 import org.junit.Test
 
 
-class TaskMaybeTest {
+class MaybeTaskTest {
 
     class MaybeTest(val task: Task<Any>) : MaybeTask<Any>() {
         override fun run(): Task<Any> {
