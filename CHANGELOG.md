@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+Version 0.4.0 *(2017-12-06)*
+----------------------------
+* Fix ObservableDisposable dispose condition
+* Fix some ObservableTasks adding their Task callback twice
+
 Version 0.3.0 *(2017-12-04)*
 ----------------------------
 * RxTask: Add TaskSupplier interface 
