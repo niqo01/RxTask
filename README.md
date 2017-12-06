@@ -49,7 +49,7 @@ Snapshots of the development version are available in [Sonatype's `snapshots` re
 License
 -------
 
-    Copyright (C) 2016 Nicolas Milliard
+    Copyright (C) 2017 Nicolas Milliard
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
