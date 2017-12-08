@@ -10,7 +10,7 @@ import io.reactivex.CompletableObserver;
 
 public abstract class CompletableTask extends Completable {
 
-    public static CompletableTask create(TaskSupplier<Task<Void>> taskSupplier){
+    public static CompletableTask fromPlayTask(TaskSupplier<Task<Void>> taskSupplier){
         return new CompletableTask() {
             @Override
             protected Task<Void> run() {

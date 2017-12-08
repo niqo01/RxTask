@@ -33,28 +33,28 @@ public class RxGeoDataClient {
     public Single<AutocompletePredictionBufferResponse> getAutocompletePredictions(String query,
                                                                                    LatLngBounds
                                                                                            bounds, AutocompleteFilter filter) {
-        return SingleTask.create(() -> client.getAutocompletePredictions(query, bounds, filter));
+        return SingleTask.fromPlayTask(() -> client.getAutocompletePredictions(query, bounds, filter));
     }
 
     @NonNull
     public Single<PlacePhotoResponse> getPhoto(PlacePhotoMetadata photoMetadata) {
-        return SingleTask.create(() -> client.getPhoto(photoMetadata));
+        return SingleTask.fromPlayTask(() -> client.getPhoto(photoMetadata));
     }
 
     @NonNull
     public Single<PlaceBufferResponse> getPlaceById(String... placeIds) {
-        return SingleTask.create(() -> client.getPlaceById(placeIds));
+        return SingleTask.fromPlayTask(() -> client.getPlaceById(placeIds));
     }
 
     @NonNull
     public Single<PlacePhotoMetadataResponse> getPlacePhotos(String placeId) {
-        return SingleTask.create(() -> client.getPlacePhotos(placeId));
+        return SingleTask.fromPlayTask(() -> client.getPlacePhotos(placeId));
     }
 
     @NonNull
     public Single<PlacePhotoResponse> getScaledPhoto(PlacePhotoMetadata photoMetadata, int width,
                                                      int height) {
-        return SingleTask.create(() -> client.getScaledPhoto(photoMetadata, width, height));
+        return SingleTask.fromPlayTask(() -> client.getScaledPhoto(photoMetadata, width, height));
     }
 
 }

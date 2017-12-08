@@ -8,7 +8,7 @@ import io.reactivex.Observer;
 
 public abstract class ObservableTask<T> extends Observable<T> {
 
-    public static <S> ObservableTask<S> create(ObservableTaskSupplier<S> taskSupplier){
+    public static <S> ObservableTask<S> fromPlayTask(ObservableTaskSupplier<S> taskSupplier){
         return new ObservableTask<S>() {
             @Override
             protected Task<Void> run(ObservableTaskCallback<S> callback) {

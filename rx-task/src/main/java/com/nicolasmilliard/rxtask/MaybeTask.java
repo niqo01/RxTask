@@ -8,7 +8,7 @@ import io.reactivex.MaybeObserver;
 
 public abstract class MaybeTask<T> extends Maybe<T> {
 
-    public static <S> MaybeTask<S> create(TaskSupplier<Task<S>> taskSupplier){
+    public static <S> MaybeTask<S> fromPlayTask(TaskSupplier<Task<S>> taskSupplier){
         return new MaybeTask<S>() {
             @Override
             protected Task<S> run() {

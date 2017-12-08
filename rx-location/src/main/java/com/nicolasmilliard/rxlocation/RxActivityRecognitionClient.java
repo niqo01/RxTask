@@ -31,12 +31,12 @@ public class RxActivityRecognitionClient {
     @RequiresPermission("com.google.android.gms.permission.ACTIVITY_RECOGNITION")
     public Completable requestActivityUpdates(Long detectionIntervalMillis, PendingIntent
             callbackIntent) {
-        return CompletableTask.create(() -> client.requestActivityUpdates(detectionIntervalMillis, callbackIntent));
+        return CompletableTask.fromPlayTask(() -> client.requestActivityUpdates(detectionIntervalMillis, callbackIntent));
     }
 
     @NonNull
     @RequiresPermission("com.google.android.gms.permission.ACTIVITY_RECOGNITION")
     public Completable removeActivityUpdates(PendingIntent callbackIntent) {
-        return CompletableTask.create(() -> client.removeActivityUpdates(callbackIntent));
+        return CompletableTask.fromPlayTask(() -> client.removeActivityUpdates(callbackIntent));
     }
 }
