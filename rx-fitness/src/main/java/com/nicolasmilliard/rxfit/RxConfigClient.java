@@ -28,16 +28,16 @@ public class RxConfigClient {
 
     @NonNull
     public Single<DataType> createCustomDataType(DataTypeCreateRequest request) {
-        return SingleTask.create(() -> client.createCustomDataType(request));
+        return SingleTask.fromPlayTask(() -> client.createCustomDataType(request));
     }
 
     @NonNull
     public Completable disableFit() {
-        return CompletableTask.create(() -> client.disableFit());
+        return CompletableTask.fromPlayTask(() -> client.disableFit());
     }
 
     @NonNull
     public Single<DataType> readDataType(String dataTypeName) {
-        return SingleTask.create(() -> client.readDataType(dataTypeName));
+        return SingleTask.fromPlayTask(() -> client.readDataType(dataTypeName));
     }
 }

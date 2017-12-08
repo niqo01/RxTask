@@ -33,16 +33,16 @@ public class RxGoogleSignInClient {
 
     @NonNull
     public Completable revokeAccess() {
-        return CompletableTask.create(() -> client.revokeAccess());
+        return CompletableTask.fromPlayTask(() -> client.revokeAccess());
     }
 
     @NonNull
     public Completable signOut() {
-        return CompletableTask.create(() -> client.signOut());
+        return CompletableTask.fromPlayTask(() -> client.signOut());
     }
 
     @NonNull
     public Single<GoogleSignInAccount> silentSignIn() {
-        return SingleTask.create(() -> client.silentSignIn());
+        return SingleTask.fromPlayTask(() -> client.silentSignIn());
     }
 }

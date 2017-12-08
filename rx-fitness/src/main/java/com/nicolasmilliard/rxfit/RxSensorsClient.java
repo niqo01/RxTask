@@ -33,7 +33,7 @@ public class RxSensorsClient {
 
     @NonNull
     public Observable<DataPoint> readData(SensorRequest request) {
-        return ObservableTask.create(callback -> {
+        return ObservableTask.fromPlayTask(callback -> {
             OnDataPointListener listener = dataPoint -> callback.onNext(dataPoint);
             callback.setDisposeListener(() -> client.remove(listener));
             return client.add(request, listener);
@@ -42,6 +42,6 @@ public class RxSensorsClient {
 
     @NonNull
     public Single<List<DataSource>> findDataSources(DataSourcesRequest request) {
-        return SingleTask.create(() -> client.findDataSources(request));
+        return SingleTask.fromPlayTask(() -> client.findDataSources(request));
     }
 }

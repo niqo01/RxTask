@@ -21,7 +21,7 @@ class ObservableTaskTest {
             wasDisposed = true
         }
 
-        val obs = ObservableTask.create<Any>(ObservableTaskSupplier { callback ->
+        val obs = ObservableTask.fromPlayTask<Any>(ObservableTaskSupplier { callback ->
             obsCallback = callback
             callback.setDisposeListener(disposeCallback)
             taskStub
@@ -62,7 +62,7 @@ class ObservableTaskTest {
             wasDisposed = true
         }
 
-        val obs = ObservableTask.create<Any>(ObservableTaskSupplier { callback ->
+        val obs = ObservableTask.fromPlayTask<Any>(ObservableTaskSupplier { callback ->
             obsCallback = callback
             callback.setDisposeListener(disposeCallback)
             failureTask
@@ -88,7 +88,7 @@ class ObservableTaskTest {
             wasDisposed = true
         }
 
-        val obs = ObservableTask.create<Any>(ObservableTaskSupplier { callback ->
+        val obs = ObservableTask.fromPlayTask<Any>(ObservableTaskSupplier { callback ->
             obsCallback = callback
             callback.setDisposeListener(disposeCallback)
             taskStub

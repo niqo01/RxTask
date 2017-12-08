@@ -34,41 +34,41 @@ public class RxHistoryClient {
 
     @NonNull
     public Single<DataReadResponse> readData(DataReadRequest request) {
-        return SingleTask.create(() -> client.readData(request));
+        return SingleTask.fromPlayTask(() -> client.readData(request));
     }
 
     @NonNull
     public Single<DataSet> readDailyTotal(DataType request) {
-        return SingleTask.create(() -> client.readDailyTotal(request));
+        return SingleTask.fromPlayTask(() -> client.readDailyTotal(request));
     }
 
     @NonNull
     public Single<DataSet> readDailyTotalFromLocalDevice(DataType request) {
-        return SingleTask.create(() -> client.readDailyTotalFromLocalDevice(request));
+        return SingleTask.fromPlayTask(() -> client.readDailyTotalFromLocalDevice(request));
     }
 
     @NonNull
     public Completable registerDataUpdateListener(DataUpdateListenerRegistrationRequest request) {
-        return CompletableTask.create(() -> client.registerDataUpdateListener(request));
+        return CompletableTask.fromPlayTask(() -> client.registerDataUpdateListener(request));
     }
 
     @NonNull
     public Completable unregisterDataUpdateListener(PendingIntent request) {
-        return CompletableTask.create(() -> client.unregisterDataUpdateListener(request));
+        return CompletableTask.fromPlayTask(() -> client.unregisterDataUpdateListener(request));
     }
 
     @NonNull
     public Completable insertData(DataSet dataSet) {
-        return CompletableTask.create(() -> client.insertData(dataSet));
+        return CompletableTask.fromPlayTask(() -> client.insertData(dataSet));
     }
 
     @NonNull
     public Completable updateData(DataUpdateRequest request) {
-        return CompletableTask.create(() -> client.updateData(request));
+        return CompletableTask.fromPlayTask(() -> client.updateData(request));
     }
 
     @NonNull
     public Completable deleteData(DataDeleteRequest request) {
-        return CompletableTask.create(() -> client.deleteData(request));
+        return CompletableTask.fromPlayTask(() -> client.deleteData(request));
     }
 }

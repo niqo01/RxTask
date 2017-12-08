@@ -41,12 +41,12 @@ public class RxFusedLocationProviderClient {
                     ".ACCESS_FINE_LOCATION"}
     )
     public Maybe<Location> getLastLocation() {
-        return MaybeTask.create(() -> client.getLastLocation());
+        return MaybeTask.fromPlayTask(() -> client.getLastLocation());
     }
 
     @NonNull
     public Completable flushLocations() {
-        return CompletableTask.create(() -> client.flushLocations());
+        return CompletableTask.fromPlayTask(() -> client.flushLocations());
     }
 
     @NonNull
@@ -55,7 +55,7 @@ public class RxFusedLocationProviderClient {
                     ".ACCESS_FINE_LOCATION"}
     )
     public Maybe<LocationAvailability> getLocationAvailability() {
-        return MaybeTask.create(() -> client.getLocationAvailability());
+        return MaybeTask.fromPlayTask(() -> client.getLocationAvailability());
     }
 
     @NonNull
@@ -64,7 +64,7 @@ public class RxFusedLocationProviderClient {
                     ".ACCESS_FINE_LOCATION"}
     )
     public Completable setMockLocation(Location location) {
-        return CompletableTask.create(() -> client.setMockLocation(location));
+        return CompletableTask.fromPlayTask(() -> client.setMockLocation(location));
     }
 
     @NonNull
@@ -73,7 +73,7 @@ public class RxFusedLocationProviderClient {
                     ".ACCESS_FINE_LOCATION"}
     )
     public Completable setMockMode(boolean isMockMode) {
-        return CompletableTask.create(() -> client.setMockMode(isMockMode));
+        return CompletableTask.fromPlayTask(() -> client.setMockMode(isMockMode));
     }
 
     @NonNull
@@ -82,7 +82,7 @@ public class RxFusedLocationProviderClient {
                     ".ACCESS_FINE_LOCATION"}
     )
     public Observable<LocationResult> requestLocationRequestUpdates(LocationRequest request) {
-        return ObservableTask.create(callback -> {
+        return ObservableTask.fromPlayTask(callback -> {
             LocationCallback resultCallback = new LocationCallback() {
                 @Override
                 public void onLocationResult(LocationResult result) {
@@ -102,7 +102,7 @@ public class RxFusedLocationProviderClient {
     )
     public Observable<LocationAvailability> requestLocationAvailabilityUpdates(LocationRequest
                                                                                        request) {
-        return ObservableTask.create(callback -> {
+        return ObservableTask.fromPlayTask(callback -> {
             LocationCallback resultCallback = new LocationCallback() {
                 @Override
                 public void onLocationAvailability(LocationAvailability locationAvailability) {
@@ -122,10 +122,10 @@ public class RxFusedLocationProviderClient {
     )
     public Completable requestLocationUpdates(LocationRequest request, PendingIntent
             callbackIntent) {
-        return CompletableTask.create(() -> client.requestLocationUpdates(request, callbackIntent));
+        return CompletableTask.fromPlayTask(() -> client.requestLocationUpdates(request, callbackIntent));
     }
 
     public Completable removeLocationUpdates(PendingIntent callbackIntent) {
-        return CompletableTask.create(() -> client.removeLocationUpdates(callbackIntent));
+        return CompletableTask.fromPlayTask(() -> client.removeLocationUpdates(callbackIntent));
     }
 }
