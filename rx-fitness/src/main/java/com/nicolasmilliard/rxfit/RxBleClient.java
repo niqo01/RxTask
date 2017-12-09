@@ -34,23 +34,23 @@ public class RxBleClient {
 
     @NonNull
     public Completable claimBleDevice(String deviceAddress) {
-        return CompletableTask.fromPlayTask(() -> client.claimBleDevice(deviceAddress));
+        return CompletableTask.create(() -> client.claimBleDevice(deviceAddress));
     }
 
     @NonNull
     public Completable claimBleDevice(BleDevice bleDevice) {
-        return CompletableTask.fromPlayTask(() -> client.claimBleDevice(bleDevice));
+        return CompletableTask.create(() -> client.claimBleDevice(bleDevice));
     }
 
     @NonNull
     public Single<List<BleDevice>> listClaimedBleDevices() {
-        return SingleTask.fromPlayTask(() -> client.listClaimedBleDevices());
+        return SingleTask.create(() -> client.listClaimedBleDevices());
     }
 
     @NonNull
     @RequiresPermission("android.permission.BLUETOOTH_ADMIN")
     public Observable<BleDevice> startBleScan(List<DataType> dataTypes, int timeoutSecs) {
-        return ObservableTask.fromPlayTask(callback -> {
+        return ObservableTask.create(callback -> {
             BleScanCallback bleCallBack = new BleScanCallback() {
                 @Override
                 public void onDeviceFound(BleDevice bleDevice) {
@@ -69,11 +69,11 @@ public class RxBleClient {
 
     @NonNull
     public Completable unclaimBleDevice(String deviceAddress) {
-        return CompletableTask.fromPlayTask(() -> client.unclaimBleDevice(deviceAddress));
+        return CompletableTask.create(() -> client.unclaimBleDevice(deviceAddress));
     }
 
     @NonNull
     public Completable unclaimBleDevice(BleDevice bleDevice) {
-        return CompletableTask.fromPlayTask(() -> client.unclaimBleDevice(bleDevice));
+        return CompletableTask.create(() -> client.unclaimBleDevice(bleDevice));
     }
 }

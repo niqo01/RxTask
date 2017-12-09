@@ -28,6 +28,6 @@ public class RxGoalsClient {
 
     @NonNull
     public Single<List<Goal>> readCurrentGoals(GoalsReadRequest request) {
-        return SingleTask.fromPlayTask(() -> client.readCurrentGoals(request));
+        return SingleTask.create(() -> client.readCurrentGoals(request));
     }
 }

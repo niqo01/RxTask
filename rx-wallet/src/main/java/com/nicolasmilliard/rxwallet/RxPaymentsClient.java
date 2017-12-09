@@ -26,11 +26,11 @@ public class RxPaymentsClient {
 
     @NonNull
     public Single<Boolean> isReadyToPay(IsReadyToPayRequest request) {
-        return SingleTask.fromPlayTask(() -> client.isReadyToPay(request));
+        return SingleTask.create(() -> client.isReadyToPay(request));
     }
 
     @NonNull
     public Single<PaymentData> loadPaymentData(PaymentDataRequest request) {
-        return SingleTask.fromPlayTask(() -> client.loadPaymentData(request));
+        return SingleTask.create(() -> client.loadPaymentData(request));
     }
 }

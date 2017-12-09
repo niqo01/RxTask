@@ -8,7 +8,7 @@ import io.reactivex.SingleObserver;
 
 public abstract class SingleTask<T> extends Single<T> {
 
-    public static <S> SingleTask<S> fromPlayTask(TaskSupplier<Task<S>> taskSupplier){
+    public static <S> SingleTask<S> create(TaskSupplier<Task<S>> taskSupplier){
         return new SingleTask<S>() {
             @Override
             protected Task<S> run() {

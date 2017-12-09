@@ -29,6 +29,6 @@ public class RxSettingsClient {
 
     @NonNull
     public Single<LocationSettingsResponse> checkLocationSettings(LocationSettingsRequest request) {
-        return SingleTask.fromPlayTask(() -> client.checkLocationSettings(request));
+        return SingleTask.create(() -> client.checkLocationSettings(request));
     }
 }
