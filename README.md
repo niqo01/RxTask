@@ -1,4 +1,4 @@
-RxTask
+RxTask (DEPRECATED)
 =========
 
 RxJava 2 binding API for Google Play Services [Task][task] APIs.  
